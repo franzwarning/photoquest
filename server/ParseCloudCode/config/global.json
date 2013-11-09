@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "photoquest"
+        }, 
+        "photoquest": {
+            "applicationId": "aGDSNbRnv8jv4Nz2iFyUInz0SrluXE333kIHq4Qm", 
+            "masterKey": "mHaeVPohxVEkgOP1i6k1rznUfExqj3j44JeVZKNg"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.8"
+    }
+}
