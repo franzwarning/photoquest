@@ -10,10 +10,9 @@
 #import <GameKit/GameKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "XPBarView.h"
-#import "JASidePanelController.h"
 #import "User+Utils.h"
 #import "XPManager.h"
 
-@interface LeftPanelViewController : UIViewController <JASidePanelDelegate>
+@interface LeftPanelViewController : UIViewController
 
 @end

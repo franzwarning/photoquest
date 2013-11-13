@@ -11,12 +11,8 @@
 @interface QuestsViewController () <QuestManagerDelegate>
 
 @property (nonatomic, strong) NSArray *currentQuests;
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) DailyQuestBoxView *dqbv;
-@property (nonatomic, strong) NSMutableArray *questBoxes;
 @property (nonatomic, strong) DailyQuest *dq;
-@property (nonatomic) BOOL introTweenHasFinished;
-@property (nonatomic, strong) NSTimer *animTimer;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -24,36 +20,22 @@
 @implementation QuestsViewController
 
 @synthesize currentQuests = _currentQuests;
-@synthesize scrollView = _scrollView;
-@synthesize dqbv = _dqbv;
-@synthesize questBoxes = _questBoxes;
 @synthesize dq = _dq;
-@synthesize introTweenHasFinished = _introTweenHasFinished;
-@synthesize animTimer = _animTimer;
+@synthesize tableView = _tableView;
 
-#define SPACE_BETWEEN_BOX 10
-#define TIME_BETWEEN_QUEST_ANIMATION 0.2
-#define QUEST_ANIMATION_TIME .3
-#define QUEST_BOX_WIDTH 300
-#define QUEST_BOX_HEIGHT 90
-#define QUEST_ANIMATION_LEFT_START -310
-#define QUEST_ANIMATION_RIGHT_START 320
+#define QUEST_Y_SPACING 8.0f
+#define QUEST_LABEL_WIDTH 206.0f
+#define QUEST_X_SPACING 20.0f
+
 /*
  * The view has finished loading
  */
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
-	// Do any additional setup after loading the view.
-  
-  self.dqbv = [[DailyQuestBoxView alloc] initWithFrame:CGRectMake(SPACE_BETWEEN_BOX, SPACE_BETWEEN_BOX, QUEST_BOX_WIDTH, QUEST_BOX_HEIGHT)];
-  [self.scrollView addSubview:self.dqbv];
-  self.questBoxes = [[NSMutableArray alloc] init];
-  
-  self.animTimer = [NSTimer timerWithTimeInterval:0.5f target:self selector:@selector(checkAnimDone) userInfo:nil repeats:YES];
-  [self.animTimer fire];
-  
-  [[NSRunLoop currentRunLoop] addTimer:self.animTimer forMode:NSRunLoopCommonModes];
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    self.dq = nil;
 }
 
 /*
@@ -61,134 +43,11 @@
  */
 - (void)viewWillAppear:(BOOL)animated
 {
-  [super viewWillAppear:animated];
-  
-  // Get the current quests the user is working on
-  [[QuestManager sharedManager] setDelegate:self];
-  self.currentQuests = [[QuestManager sharedManager] getCurrentQuests];
-  
-  [self layoutQuests];
-}
-
-/*
- * Adds the quests to the view in an elegant way
- */
-- (void)layoutQuests
-{
-  double currentY = SPACE_BETWEEN_BOX * 2 + self.dqbv.frame.size.height;
-  
-  if ([self.questBoxes count] == 0) {
+    [super viewWillAppear:animated];
     
-    self.introTweenHasFinished = NO;
-    for (int i = 0; i < [self.currentQuests count]; i++) {
-      // Create a box for each quest
-      Quest *currentQuest = [self.currentQuests objectAtIndex:i];
-      
-      // Animate the quests coming in
-      DefaultQuestBoxView *box;
-      if ((i%2) != 0) {
-        box = [[DefaultQuestBoxView alloc] initWithFrame:CGRectMake(QUEST_ANIMATION_LEFT_START, currentY, QUEST_BOX_WIDTH, QUEST_BOX_HEIGHT) quest:currentQuest];
-        [self.scrollView addSubview:box];
-        [UIView animateWithDuration:QUEST_ANIMATION_TIME delay:i*TIME_BETWEEN_QUEST_ANIMATION options:UIViewAnimationOptionCurveEaseOut animations:^{
-          [box setFrame:CGRectMake(SPACE_BETWEEN_BOX * 2, currentY, box.frame.size.width, box.frame.size.height)];
-        } completion:^(BOOL finished) {
-          [UIView animateWithDuration:.1f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            [box setFrame:CGRectMake(SPACE_BETWEEN_BOX, currentY, box.frame.size.width, box.frame.size.height)];
-          } completion:^(BOOL finished) {
-            if (i == (self.currentQuests.count - 1)) {
-              self.introTweenHasFinished = YES;
-            }
-          }];
-        }];
-        
-      } else {
-        box = [[DefaultQuestBoxView alloc] initWithFrame:CGRectMake(QUEST_ANIMATION_RIGHT_START, currentY, QUEST_BOX_WIDTH, QUEST_BOX_HEIGHT) quest:currentQuest];
-        [self.scrollView addSubview:box];
-        [UIView animateWithDuration:QUEST_ANIMATION_TIME delay:i*TIME_BETWEEN_QUEST_ANIMATION options:UIViewAnimationOptionCurveEaseOut animations:^{
-          [box setFrame:CGRectMake(0, currentY, box.frame.size.width, box.frame.size.height)];
-        } completion:^(BOOL finished) {
-          [UIView animateWithDuration:.1f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            [box setFrame:CGRectMake(SPACE_BETWEEN_BOX, currentY, box.frame.size.width, box.frame.size.height)];
-          } completion:^(BOOL finished) {
-            if (i == (self.currentQuests.count - 1)) {
-              self.introTweenHasFinished = YES;
-            }
-          }];
-        }];
-      }
-      UITapGestureRecognizer *singleTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(questClicked:)];
-      if (![box singleTap]) {
-        [box addGestureRecognizer:singleTap];
-        [box setSingleTap:singleTap];
-      }
-      box.tag = i;
-      [self.questBoxes addObject:box];
-      
-      currentY += box.frame.size.height + SPACE_BETWEEN_BOX;
-    }
-  }
-}
-
-- (void)updateScrollViewHeight
-{
-  DefaultQuestBoxView *lastBox= [self.questBoxes lastObject];
-  float totalHeight = lastBox.frame.origin.y + lastBox.frame.size.height + SPACE_BETWEEN_BOX;
-  [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width, totalHeight)];
-}
-
-/*
- * One of the quests was clicked - go to the QuestDetailViewController
- */
-- (void)questClicked:(UITapGestureRecognizer *)sender
-{
-  UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-  QuestDetailViewController *qdvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestDetailViewController"];
-  [qdvc setCurrentQuest:[self.currentQuests objectAtIndex:sender.view.tag]];
-  [qdvc setIsDaily:NO];
-  [self.navigationController pushViewController:qdvc animated:YES];
-}
-
-/*
- * Daily Quest clicked
- */
-- (void)dailyQuestClicked
-{
-  UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-  QuestDetailViewController *qdvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestDetailViewController"];
-  [qdvc setDailyQuest:self.dq];
-  [qdvc setIsDaily:YES];
-  [self.navigationController pushViewController:qdvc animated:YES];
-}
-
-/*
- * Check if the intro tween has finished - then perform the next animation
- */
-- (void)checkAnimDone
-{
-  if (self.introTweenHasFinished && self.dq) {
-    [self.animTimer invalidate];
-
-    float newDailyBoxHeight = [self.dqbv updateWithQuest:self.dq];
-    
-    for (int i = 0; i < self.questBoxes.count; i++) {
-      DefaultQuestBoxView *box = [self.questBoxes objectAtIndex:i];
-      [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [box setFrame:CGRectMake(box.frame.origin.x, box.frame.origin.y + (newDailyBoxHeight - self.dqbv.frame.size.height), box.frame.size.width, box.frame.size.height)];
-      } completion:^(BOOL complete) {}];
-    }
-    
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-      [self.dqbv setFrame:CGRectMake(self.dqbv.frame.origin.x, self.dqbv.frame.origin.y, self.dqbv.frame.size.width, newDailyBoxHeight)];
-    } completion:^(BOOL finished) {
-      [self.dqbv showQuest:self.dq withHeight:newDailyBoxHeight];
-      [self updateScrollViewHeight];
-      UITapGestureRecognizer *singleTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dailyQuestClicked)];
-      if (![self.dqbv singleTap]) {
-        [self.dqbv addGestureRecognizer:singleTap];
-        [self.dqbv setSingleTap:singleTap];
-      }
-    }];
-  }
+    // Get the current quests the user is working on
+    [[QuestManager sharedManager] setDelegate:self];
+    self.currentQuests = [[QuestManager sharedManager] getCurrentQuests];
 }
 
 /*
@@ -196,13 +55,33 @@
  */
 - (void)foundDailyQuest:(DailyQuest *)dailyQuest
 {
-  if (![self.animTimer isValid] && !self.dq) {
-    self.animTimer = [NSTimer timerWithTimeInterval:0.5f target:self selector:@selector(checkAnimDone) userInfo:nil repeats:YES];
-    [self.animTimer fire];
-    [[NSRunLoop currentRunLoop] addTimer:self.animTimer forMode:NSRunLoopCommonModes];
-  }
-  self.dq = dailyQuest;
+    if (!self.dq  || ![dailyQuest.text isEqualToString:self.dq.text]) {
+        self.dq = dailyQuest;
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];
+        
+        // Setup the timer
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateDailyQuestTimer) userInfo:nil repeats:YES];
+        [timer fire];
+        
+        // So the timer still fires while scrolling
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    }
+}
 
+/*
+ * Update the timer in the daily quest box
+ */
+- (void)updateDailyQuestTimer
+{
+    NSDate *referenceDate = [NSDate date];
+    int hours = 23 - [referenceDate hour];
+    int mins = 59 - [referenceDate minute];
+    int seconds = 59 - [referenceDate second];
+    
+    DailyQuestCell *dqc = (DailyQuestCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    dqc.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hours, mins, seconds];
 }
 
 /*
@@ -210,17 +89,116 @@
  */
 - (void)failedToGetDailyQuest
 {
-  self.dq = nil;
-  float newDailyBoxHeight = [self.dqbv updateHeightForQuest:@"FAILED TO LOAD QUEST..."];
-  
-  for (int i = 0; i < self.questBoxes.count; i++) {
-    DefaultQuestBoxView *box = [self.questBoxes objectAtIndex:i];
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-      [box setFrame:CGRectMake(box.frame.origin.x, box.frame.origin.y + (newDailyBoxHeight - self.dqbv.frame.size.height), box.frame.size.width, box.frame.size.height)];
-    } completion:^(BOOL complete) {}];
-  }
-  
-  [self.dqbv setFailed];
+    NSLog(@"Failed to get the daily quest...");
 }
+
+
+#pragma TableViewDataSource
+
+/*
+ * Called for every cell in the table view
+ */
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    NSString *cellIdentifier = @"";
+    
+    if (indexPath.row == 0) {
+        // Release a daily quest cell
+        cellIdentifier = @"DailyQuestCell";
+        
+        DailyQuestCell *dqc = (DailyQuestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (self.dq) {
+            dqc.questLabel.text = self.dq.text;
+            dqc.xpView.hidden = NO;
+            dqc.timeView.hidden = NO;
+            dqc.xpLabel.text = [NSString stringWithFormat:@"%d XP", self.dq.xp];
+            
+        } else {
+            dqc.questLabel.text = @"Loading...";
+            dqc.xpView.hidden = YES;
+            dqc.timeView.hidden = YES;
+        }
+        
+        // Adjust the size of the label accordingly
+        CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
+        CGSize expectedLabelSize = [dqc.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
+        [dqc.questLabel setFrame:CGRectMake(QUEST_X_SPACING, QUEST_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height + 1)];
+        
+        return dqc;
+    } else {
+        // Release a default quest cell
+        cellIdentifier = @"DefaultQuestCell";
+        
+        DefaultQuestCell *dqc = (DefaultQuestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        Quest *currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
+        
+        dqc.questLabel.text = currentQuest.text;
+        dqc.xpLabel.text = [NSString stringWithFormat:@"%d XP", [currentQuest.xp intValue]];
+
+        // Adjust the size of the label accordingly
+        CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
+        CGSize expectedLabelSize = [dqc.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
+        [dqc.questLabel setFrame:CGRectMake(QUEST_X_SPACING, QUEST_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height + 1)];
+        
+        return dqc;
+    }
+    
+    return nil;
+}
+
+/*
+ * Get the number of rows in a given section in the table view
+ */
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return ([self.currentQuests count] + 1);
+}
+
+/*
+ * Get the height for each row @ index path
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *questText = @"";
+    if (indexPath.row == 0) {
+        if (self.dq) questText = self.dq.text;
+        else questText = @"Loading...";
+    } else {
+        Quest *currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
+        questText = currentQuest.text;
+    }
+    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
+    CGSize expectedLabelSize = [questText sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
+    return MAX(50, (2 * QUEST_Y_SPACING) + expectedLabelSize.height + 1);
+}
+
+/*
+ * To hide the extra rows in the table view.
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    // This will create a "invisible" footer
+    return 0.01f;
+}
+
+/*
+ * After selecting a row
+ */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    QuestDetailViewController *qdvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestDetailViewController"];
+    
+    if (indexPath.row == 0) {
+        qdvc.isDaily = YES;
+        qdvc.dailyQuest = self.dq;
+    } else {
+        qdvc.isDaily = NO;
+        qdvc.currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
+    }
+    
+    [self.navigationController pushViewController:qdvc animated:YES];
+}
+
 
 @end

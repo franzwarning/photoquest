@@ -11,32 +11,37 @@
 @interface QuestDetailViewController ()
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet UILabel *questTextLabel;
+@property (nonatomic, weak) IBOutlet UILabel *questLabel;
+@property (nonatomic, weak) IBOutlet UILabel *xpLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIView *timeView;
+@property (nonatomic, weak) IBOutlet UIButton *beginQuestButton;
 
 @end
 
 @implementation QuestDetailViewController
 
-#define QUEST_ANIMATION_TIME .3
-#define QUEST_BOX_WIDTH 300
-#define QUEST_BOX_HEIGHT 90
-#define QUEST_ANIMATION_LEFT_START -310
-#define QUEST_ANIMATION_RIGHT_START 320
-#define TOP_PADDING 10
-#define LEFT_PADDING 10
-
+@synthesize questLabel = _questLabel;
+@synthesize timeLabel = _timeLabel;
+@synthesize xpLabel = _xpLabel;
 @synthesize currentQuest = _currentQuest;
 @synthesize scrollView = _scrollView;
-@synthesize questTextLabel = _questTextLabel;
 @synthesize isDaily = _isDaily;
 @synthesize dailyQuest = _dailyQuest;
+@synthesize timeView = _timeView;
+@synthesize beginQuestButton = _beginQuestButton;
 
 /*
- * Take you back to the previous page
+ * Called when the view first loads
  */
-- (IBAction)goBack:(id)sender
+- (void)viewDidLoad
 {
-  [self.navigationController popViewControllerAnimated:YES];
+    [super viewDidLoad];
+    
+    self.beginQuestButton.layer.cornerRadius = 6.0f;
+    self.beginQuestButton.layer.borderColor = [UIColor colorWithRed:0.18f green:0.80f blue:0.44f alpha:1.00f].CGColor;
+    self.beginQuestButton.layer.borderWidth = 3.0f;
+    [self.beginQuestButton.layer setMasksToBounds:YES];
 }
 
 /*
@@ -46,31 +51,7 @@
 {
   [super viewWillAppear:animated];
   
-  if (!self.isDaily) {
-    DefaultQuestBoxView *box = [[DefaultQuestBoxView alloc] initWithFrame:CGRectMake(QUEST_ANIMATION_LEFT_START, TOP_PADDING, QUEST_BOX_WIDTH, QUEST_BOX_HEIGHT) quest:self.currentQuest];
-    [self.scrollView addSubview:box];
-    [UIView animateWithDuration:QUEST_ANIMATION_TIME delay:0.3f options:UIViewAnimationOptionCurveEaseOut animations:^{
-      [box setFrame:CGRectMake(LEFT_PADDING * 2, TOP_PADDING, box.frame.size.width, box.frame.size.height)];
-    } completion:^(BOOL finished) {
-      [UIView animateWithDuration:.1f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [box setFrame:CGRectMake(LEFT_PADDING, TOP_PADDING, box.frame.size.width, box.frame.size.height)];
-      } completion:^(BOOL finished) {}];
-    }];
-  } else {
-    DailyQuestBoxView *box = [[DailyQuestBoxView alloc] initWithFrame:CGRectMake(QUEST_ANIMATION_LEFT_START, TOP_PADDING, QUEST_BOX_WIDTH, QUEST_BOX_HEIGHT)];
-    float newHeight = [box updateWithQuest:self.dailyQuest];
-
-    [box setFrame:CGRectMake(box.frame.origin.x, box.frame.origin.y, box.frame.size.width, newHeight)];
-    [box showQuest:self.dailyQuest withHeight:newHeight];
-    [self.scrollView addSubview:box];
-    [UIView animateWithDuration:QUEST_ANIMATION_TIME delay:0.3f options:UIViewAnimationOptionCurveEaseOut animations:^{
-      [box setFrame:CGRectMake(LEFT_PADDING * 2, TOP_PADDING, box.frame.size.width, box.frame.size.height)];
-    } completion:^(BOOL finished) {
-      [UIView animateWithDuration:.1f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [box setFrame:CGRectMake(LEFT_PADDING, TOP_PADDING, box.frame.size.width, box.frame.size.height)];
-      } completion:^(BOOL finished) {}];
-    }];
-  }
+    
 }
 
 @end

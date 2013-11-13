@@ -12,5 +12,8 @@
 
 - (BOOL)isSameDay:(NSDate *)otherDate;
 - (NSDate *)strippedDate;
+- (int)hour;
+- (int)minute;
+- (int)second;
 
 @end

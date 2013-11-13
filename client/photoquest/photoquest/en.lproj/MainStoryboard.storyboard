@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="cHM-0k-Ikf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yhI-P7-mcE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
-        <!--Quests Navigation Controller-->
+        <!--Quests Navigation Controller - Quests-->
         <scene sceneID="4dQ-lw-hzw">
             <objects>
-                <navigationController storyboardIdentifier="QuestsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="jkT-Bw-6eZ" customClass="QuestsNavigationController" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
+                <navigationController storyboardIdentifier="QuestsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jkT-Bw-6eZ" customClass="QuestsNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Quests" image="questsTab.png" id="3cB-uR-Qr3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oHI-LL-gPx">
+                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                            <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="2" kind="relationship" relationship="rootViewController" id="3jq-Ky-wjh"/>
@@ -20,36 +27,119 @@
             </objects>
             <point key="canvasLocation" x="-1756" y="-943"/>
         </scene>
-        <!--Quests View Controller-->
+        <!--Quests View Controller - pq-->
         <scene sceneID="5">
             <objects>
                 <viewController storyboardIdentifier="QuestsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2" customClass="QuestsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" id="qdm-ZB-HGp">
-                                <rect key="frame" x="0.0" y="50" width="320" height="498"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" id="aNl-xA-RDb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="PHOTOQUEST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cLh-RK-9qe" customClass="BebasLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="37"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="qC3-Fx-iAg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DailyQuestCell" rowHeight="77" id="apI-s4-2MW" customClass="DailyQuestCell">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="77"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="apI-s4-2MW" id="DdA-nG-Z3X">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Liner" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MPm-zZ-zGg">
+                                                    <rect key="frame" x="20" y="8" width="206" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" id="0I2-9m-tqB">
+                                                    <rect key="frame" x="234" y="0.0" width="86" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 XP" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ldN-p5-SQg">
+                                                            <rect key="frame" x="10" y="2" width="67" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.61176472900000001" green="0.34901961679999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" id="wxD-AH-PlQ">
+                                                    <rect key="frame" x="234" y="25" width="86" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:13:14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jVb-rq-S2G">
+                                                            <rect key="frame" x="10" y="2" width="67" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.69821588549148339" green="0.32467131426262108" blue="0.84885204081632648" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="questLabel" destination="MPm-zZ-zGg" id="aG5-xI-18r"/>
+                                            <outlet property="timeLabel" destination="jVb-rq-S2G" id="pcC-Ql-KdI"/>
+                                            <outlet property="timeView" destination="wxD-AH-PlQ" id="roG-Zy-Tip"/>
+                                            <outlet property="xpLabel" destination="ldN-p5-SQg" id="tRS-cf-Mxp"/>
+                                            <outlet property="xpView" destination="0I2-9m-tqB" id="LqP-ME-7WZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DefaultQuestCell" rowHeight="94" id="Tp1-Wb-MXU" customClass="DefaultQuestCell">
+                                        <rect key="frame" x="0.0" y="163" width="320" height="94"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tp1-Wb-MXU" id="K6c-34-wET">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="jAm-t3-YNg">
+                                                    <rect key="frame" x="234" y="0.0" width="86" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 XP" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qPr-50-vri">
+                                                            <rect key="frame" x="21" y="2" width="56" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.61176472900000001" green="0.34901961679999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                                                </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is an example of a really long quest just to see how the spacing works out" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sOp-rN-bzp">
+                                                    <rect key="frame" x="20" y="8" width="206" height="85"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="questLabel" destination="sOp-rN-bzp" id="9bH-es-loL"/>
+                                            <outlet property="xpLabel" destination="qPr-50-vri" id="dxg-Ny-q7E"/>
+                                            <outlet property="xpView" destination="jAm-t3-YNg" id="Is6-ao-4ZL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="7ol-eR-egJ"/>
+                                    <outlet property="delegate" destination="2" id="ki1-lL-rRy"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3ZW-gd-Jwg"/>
+                    <navigationItem key="navigationItem" title="pq" id="3ZW-gd-Jwg"/>
                     <connections>
-                        <outlet property="scrollView" destination="qdm-ZB-HGp" id="hrL-7F-Vx6"/>
+                        <outlet property="tableView" destination="qC3-Fx-iAg" id="Wxc-fR-Iif"/>
                         <segue destination="Hec-5d-lw6" kind="push" identifier="QuestDetailViewController" id="egK-ML-pnO"/>
                         <segue destination="cHM-0k-Ikf" kind="modal" identifier="GCLogin" modalTransitionStyle="crossDissolve" id="Far-bl-5vP"/>
                     </connections>
@@ -58,10 +148,11 @@
             </objects>
             <point key="canvasLocation" x="-1224" y="-943"/>
         </scene>
-        <!--Rate Navigation Controller-->
+        <!--Rate Navigation Controller - Rate-->
         <scene sceneID="RnG-Ic-U55">
             <objects>
-                <navigationController storyboardIdentifier="RateNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="jSb-SC-040" customClass="RateNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RateNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jSb-SC-040" customClass="RateNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Rate" image="stats-bars.png" id="nGP-Z2-UjU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J6I-bc-hBu">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -73,10 +164,33 @@
             </objects>
             <point key="canvasLocation" x="-1756" y="-243"/>
         </scene>
-        <!--Profile Navigation Controller-->
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="OIl-G1-6a6">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="yhI-P7-mcE" customClass="MainTabBarController" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="oc4-o3-18s">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.61176472900000001" green="0.34901961679999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jkT-Bw-6eZ" kind="relationship" relationship="viewControllers" id="Kdd-Qx-kf8"/>
+                        <segue destination="jSb-SC-040" kind="relationship" relationship="viewControllers" id="deo-lR-1Iv"/>
+                        <segue destination="mfL-QI-fqx" kind="relationship" relationship="viewControllers" id="YJL-9a-xhC"/>
+                        <segue destination="qKg-Dc-VRT" kind="relationship" relationship="viewControllers" id="wHX-lk-KDg"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z2t-wv-cYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2310" y="435"/>
+        </scene>
+        <!--Profile Navigation Controller - Profile-->
         <scene sceneID="isD-FI-9pO">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="mfL-QI-fqx" customClass="ProfileNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mfL-QI-fqx" customClass="ProfileNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.png" id="3fv-1c-aDR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jqq-bf-jx5">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -88,10 +202,11 @@
             </objects>
             <point key="canvasLocation" x="-1758" y="435"/>
         </scene>
-        <!--Friends Navigation Controller-->
+        <!--Friends Navigation Controller - Friends-->
         <scene sceneID="Lae-Fc-4cU">
             <objects>
-                <navigationController storyboardIdentifier="FriendsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="qKg-Dc-VRT" customClass="FriendsNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FriendsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qKg-Dc-VRT" customClass="FriendsNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Friends" image="person-stalker.png" id="3HJ-gr-VSW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ue0-9q-UUm">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -108,7 +223,7 @@
             <objects>
                 <viewController id="FPa-9p-C0y" customClass="FriendsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lpP-e4-YmN">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -118,27 +233,12 @@
             </objects>
             <point key="canvasLocation" x="-1224" y="1105"/>
         </scene>
-        <!--Achievements Navigation Controller-->
-        <scene sceneID="cBu-9t-Q3o">
-            <objects>
-                <navigationController storyboardIdentifier="AchievementsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="Nhd-uX-TmK" customClass="AchievementsNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wLO-ux-Qac">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="cj3-1v-sqL" kind="relationship" relationship="rootViewController" id="BYK-Vf-33D"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OHg-Je-BvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1758" y="1797"/>
-        </scene>
         <!--Achievements View Controller-->
         <scene sceneID="Ql1-6x-cGx">
             <objects>
                 <viewController id="cj3-1v-sqL" customClass="AchievementsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ULi-XW-r4p">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -153,7 +253,7 @@
             <objects>
                 <viewController id="JMa-yD-kZA" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yM0-bq-p0N">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -163,70 +263,109 @@
             </objects>
             <point key="canvasLocation" x="-1224" y="435"/>
         </scene>
-        <!--Rate View Controller-->
+        <!--Rate View Controller - Judge-->
         <scene sceneID="ujG-jt-aGa">
             <objects>
                 <viewController id="Qlk-zr-Bhp" customClass="RateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fch-lg-1Hg">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MTp-zK-J7f"/>
+                    <navigationItem key="navigationItem" title="Judge" id="MTp-zK-J7f"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfe-yW-i0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1224" y="-243"/>
         </scene>
-        <!--Quest Detail View Controller-->
+        <!--Quest Detail View Controller - QuestDetailViewController-->
         <scene sceneID="4bn-tX-sms">
             <objects>
-                <viewController storyboardIdentifier="QuestDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hec-5d-lw6" customClass="QuestDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestDetailViewController" title="QuestDetailViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hec-5d-lw6" customClass="QuestDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cMh-SJ-ylL">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="TWZ-Gg-4gi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="QUEST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IvQ-an-iUV" customClass="BebasLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="37"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EDO-r8-fev">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="backButton.png">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" image="backButtonHit.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goBack:" destination="Hec-5d-lw6" eventType="touchUpInside" id="XCC-hJ-EIN"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" id="iX8-dU-jfo">
-                                <rect key="frame" x="0.0" y="50" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N99-Dc-Dhx">
-                                        <rect key="frame" x="0.0" y="428" width="320" height="50"/>
+                                    <view contentMode="scaleToFill" id="67V-Ai-ZTh">
+                                        <rect key="frame" x="20" y="158" width="280" height="254"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Button" image="beginQuestButton.png">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1003" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiN-Us-ulf">
+                                                <rect key="frame" x="0.0" y="33" width="47" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="attempts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fe3-nt-X9Q">
+                                                <rect key="frame" x="55" y="33" width="132" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="success rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="14U-Lk-Nd3">
+                                                <rect key="frame" x="55" y="58" width="132" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kHr-5w-XZM">
+                                                <rect key="frame" x="0.0" y="58" width="47" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" id="zhD-Y8-Xaa">
+                                                <rect key="frame" x="0.0" y="0.0" width="86" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 XP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xOg-ZA-aqJ">
+                                                        <rect key="frame" x="10" y="2" width="67" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.61176472900000001" green="0.34901961679999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                                            </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends succeeded" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="esz-b8-zcb">
+                                                <rect key="frame" x="55" y="85" width="141" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="is1-GF-YOA">
+                                                <rect key="frame" x="0.0" y="85" width="47" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is an example of a really long quest just to see how the spacing works out." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hnf-IJ-6ne">
+                                        <rect key="frame" x="20" y="75" width="280" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTC-kS-r13">
+                                        <rect key="frame" x="92" y="420" width="137" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        <state key="normal" title="Begin Quest">
+                                            <color key="titleColor" red="0.18039216101169586" green="0.80000007152557373" blue="0.43921571969985962" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" image="beginQuestButtonPressed.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -234,83 +373,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2TZ-bV-UnC"/>
+                    <navigationItem key="navigationItem" title="quest" id="2TZ-bV-UnC"/>
                     <connections>
+                        <outlet property="beginQuestButton" destination="PTC-kS-r13" id="WIS-Yh-3Fo"/>
+                        <outlet property="questLabel" destination="hnf-IJ-6ne" id="jsd-3p-lBV"/>
                         <outlet property="scrollView" destination="iX8-dU-jfo" id="sbY-KV-MdP"/>
+                        <outlet property="xpLabel" destination="xOg-ZA-aqJ" id="jaS-la-RaG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETD-BN-PIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-689" y="-943"/>
         </scene>
-        <!--Left Panel View Controller-->
-        <scene sceneID="ioz-hS-f5I">
-            <objects>
-                <viewController storyboardIdentifier="LeftPanelViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2yt-u2-RLz" customClass="LeftPanelViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pTw-aj-gNU">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" id="49j-ev-hD3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="[USERNAME]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" id="Jkg-bG-ON9" customClass="BebasLabel">
-                                        <rect key="frame" x="20" y="128" width="208" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="40"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="200x200.png" id="AuR-YA-Kxq">
-                                        <rect key="frame" x="20" y="20" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mn1-bE-k6I">
-                                        <rect key="frame" x="128" y="20" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="100"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="levelLabel" destination="Mn1-bE-k6I" id="aap-6c-zzl"/>
-                        <outlet property="profPicImageView" destination="AuR-YA-Kxq" id="SZF-g3-aI1"/>
-                        <outlet property="scrollView" destination="49j-ev-hD3" id="Efb-02-lJG"/>
-                        <outlet property="usernameLabel" destination="Jkg-bG-ON9" id="66a-Na-GWh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BUL-Si-bHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2272" y="441"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="aeU-XH-f2S">
             <objects>
                 <viewController storyboardIdentifier="GCLoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cHM-0k-Ikf" customClass="GCLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TXN-HR-gJc">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="QLe-g2-pck">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="WELCOME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bny-Jy-EG1" customClass="BebasLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                                        <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="37"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" id="bNi-BN-VZd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1vm-ef-ZVm">
@@ -367,15 +451,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6K-yV-hmK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2272" y="-243"/>
+            <point key="canvasLocation" x="-1224" y="-1621"/>
         </scene>
     </scenes>
     <resources>
-        <image name="200x200.png" width="200" height="200"/>
-        <image name="backButton.png" width="70" height="70"/>
-        <image name="backButtonHit.png" width="70" height="70"/>
-        <image name="beginQuestButton.png" width="320" height="50"/>
-        <image name="beginQuestButtonPressed.png" width="320" height="50"/>
+        <image name="person-stalker.png" width="30" height="30"/>
+        <image name="person.png" width="30" height="30"/>
+        <image name="questsTab.png" width="30" height="30"/>
+        <image name="stats-bars.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -18,17 +18,17 @@
 {
   [super viewDidLoad];
   
-  // Get whether or not this is the users first time launching the app as well
-  bool firstTime = true;
-  if ([[NSUserDefaults standardUserDefaults] valueForKey:@"firstTime"]) firstTime = false;
-  
-  // Get the storyboard because we need it to instantiate view controllers
-  UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
-  if (!firstTime) {
-    self.viewControllers = [NSArray arrayWithObject:[mainStoryboard instantiateViewControllerWithIdentifier:@"QuestsViewController"]];
-  } else {
-    self.viewControllers = [NSArray arrayWithObject:[mainStoryboard instantiateViewControllerWithIdentifier:@"GCLoginViewController"]];
-  }
+//  // Get whether or not this is the users first time launching the app as well
+//  bool firstTime = true;
+//  if ([[NSUserDefaults standardUserDefaults] valueForKey:@"firstTime"]) firstTime = false;
+//  
+//  // Get the storyboard because we need it to instantiate view controllers
+//  UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
+//  if (!firstTime) {
+//    self.viewControllers = [NSArray arrayWithObject:[mainStoryboard instantiateViewControllerWithIdentifier:@"QuestsViewController"]];
+//  } else {
+//    self.viewControllers = [NSArray arrayWithObject:[mainStoryboard instantiateViewControllerWithIdentifier:@"GCLoginViewController"]];
+//  }
 }
 
 @end

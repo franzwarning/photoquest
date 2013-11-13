@@ -34,15 +34,10 @@
   [super viewDidLoad];
   
   // Set a timer that goes off every two seconds to see if the user has authenticated
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkForLogin) userInfo:nil repeats:YES];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(checkForLogin) userInfo:nil repeats:YES];
   
   // Hide the loading stuff
   [self loadingUIHidden:true];
-  
-  // Make sure the sidepanel is hidden and center view is selected
-  JASidePanelController *sidePanelController = (JASidePanelController *)((AppDelegate *)[[UIApplication sharedApplication] delegate]).viewController;
-  [sidePanelController showCenterPanelAnimated:true];
-  [sidePanelController setAllowLeftSwipe:false];
 }
 
 /*
@@ -64,12 +59,7 @@
       [(AppDelegate *)[[UIApplication sharedApplication] delegate] setupUser];
     }
     
-    [self dismissViewControllerAnimated:YES completion:^{
-      // Enable the side panel stuff
-      JASidePanelController *sidePanelController = (JASidePanelController *)((AppDelegate *)[[UIApplication sharedApplication] delegate]).viewController;
-      [sidePanelController showCenterPanelAnimated:true];
-      [sidePanelController setAllowLeftSwipe:true];
-    }];
+    [self dismissViewControllerAnimated:YES completion:^{}];
   }
 }
 
@@ -110,12 +100,7 @@
         } else {
           NSLog(@"The current user is already logged in? Something must have gone wrong....");
         }
-        
-        // Enable the side panel stuff
-        JASidePanelController *sidePanelController = (JASidePanelController *)((AppDelegate *)[[UIApplication sharedApplication] delegate]).viewController;
-        [sidePanelController showCenterPanelAnimated:true];
-        [sidePanelController setAllowLeftSwipe:true];
-        
+    
         // Go to main quest view
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         UIViewController *questsViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestsViewController"];

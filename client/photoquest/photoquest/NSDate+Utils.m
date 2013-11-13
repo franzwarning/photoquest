@@ -10,6 +10,9 @@
 
 @implementation NSDate (Utils)
 
+/*
+ * Check if two dates are the same day
+ */
 - (BOOL)isSameDay:(NSDate*)otherDate {
   NSCalendar* calendar = [NSCalendar currentCalendar];
   
@@ -22,12 +25,37 @@
   [comp1 year]  == [comp2 year];
 }
 
+/*
+ * Strip the date of any time credentials
+ */
 - (NSDate *)strippedDate
 {
   unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
   NSCalendar* calendar = [NSCalendar currentCalendar];
   NSDateComponents* components = [calendar components:flags fromDate:self];
   return [[calendar dateFromComponents:components] dateByAddingTimeInterval:[[NSTimeZone localTimeZone]secondsFromGMT]];
+}
+
+- (int)hour
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"HH"];
+    NSString *dateString = [df stringFromDate:self];
+    return [dateString integerValue];
+}
+- (int)minute
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"mm"];
+    NSString *dateString = [df stringFromDate:self];
+    return [dateString integerValue];
+}
+- (int)second
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"ss"];
+    NSString *dateString = [df stringFromDate:self];
+    return [dateString integerValue];
 }
 
 @end

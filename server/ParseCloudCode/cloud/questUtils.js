@@ -24,7 +24,7 @@ exports.getDailyQuest = function(request, response) {
 ///
 /// WARNING: THIS FUNCTION IS DESTRUCTIVE
 /// 
-Parse.Cloud.define("uploadQuestJSON", function(request, response) {
+exports.uploadQuestJSON = function(request, response)  {
 
 	// First remove all the current quests
 	var query = new Parse.Query("Quest");

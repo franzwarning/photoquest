@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 #import "Quest.h"
-#import "DailyQuestBoxView.h"
-#import "DefaultQuestBoxView.h"
+#import "DailyQuest.h"
 
 @interface QuestDetailViewController : UIViewController
 

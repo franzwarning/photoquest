@@ -17,23 +17,6 @@
                 clientKey:@"qjVw5kWxxzzdyCOy1YqpZnazNnPixCvhdAdGfTaI"];
   [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
   
-  // Set the view controller structure
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  
-  // Get the storyboard so we can do shit with it
-  UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle: nil];
-  
-  // Set the left and center panels
-  self.viewController = [[JASidePanelController alloc] init];
-  [self.viewController setAllowLeftOverpan:NO];
-  self.viewController.leftPanel = [mainStoryboard instantiateViewControllerWithIdentifier:@"LeftPanelViewController"];
-  
-  UIViewController *centerViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestsNavigationController"];
-  self.viewController.centerPanel = centerViewController;
-  
-  self.window.rootViewController = self.viewController;
-  [self.window makeKeyAndVisible];
-  
   bool firstTime = true;
   if ([[NSUserDefaults standardUserDefaults] valueForKey:@"firstTime"]) firstTime = false;
   
@@ -44,11 +27,6 @@
   //  [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
   
   return YES;
-}
-
-- (JASidePanelController *)getSidePanelController
-{
-  return self.viewController;
 }
 
 /*
