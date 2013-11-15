@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yhI-P7-mcE">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Quests Navigation Controller - Quests-->
@@ -290,8 +290,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tz1-CL-4FR">
+                                        <rect key="frame" x="20" y="158" width="280" height="280"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </imageView>
                                     <view contentMode="scaleToFill" id="67V-Ai-ZTh">
-                                        <rect key="frame" x="20" y="158" width="280" height="254"/>
+                                        <rect key="frame" x="20" y="158" width="280" height="280"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1003" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiN-Us-ulf">
@@ -360,13 +365,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTC-kS-r13">
-                                        <rect key="frame" x="92" y="420" width="137" height="35"/>
+                                        <rect key="frame" x="92" y="460" width="137" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="Begin Quest">
                                             <color key="titleColor" red="0.18039216101169586" green="0.80000007152557373" blue="0.43921571969985962" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="questButtonPressed:" destination="Hec-5d-lw6" eventType="touchUpInside" id="soB-Iz-u0B"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>
@@ -375,9 +383,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="quest" id="2TZ-bV-UnC"/>
                     <connections>
-                        <outlet property="beginQuestButton" destination="PTC-kS-r13" id="WIS-Yh-3Fo"/>
+                        <outlet property="imageView" destination="Tz1-CL-4FR" id="Wwg-wm-F9x"/>
+                        <outlet property="questButton" destination="PTC-kS-r13" id="Il6-kA-y9M"/>
                         <outlet property="questLabel" destination="hnf-IJ-6ne" id="jsd-3p-lBV"/>
                         <outlet property="scrollView" destination="iX8-dU-jfo" id="sbY-KV-MdP"/>
+                        <outlet property="statsView" destination="67V-Ai-ZTh" id="bJ5-SR-IHm"/>
                         <outlet property="xpLabel" destination="xOg-ZA-aqJ" id="jaS-la-RaG"/>
                     </connections>
                 </viewController>

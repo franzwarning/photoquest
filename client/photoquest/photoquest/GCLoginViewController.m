@@ -20,12 +20,6 @@
 
 @implementation GCLoginViewController
 
-@synthesize timer = _timer;
-@synthesize gameCenterLoginButton = _gameCenterLoginButton;
-@synthesize gameCenterMessage = _gameCenterMessage;
-@synthesize loadingLabel = _loadingLabel;
-@synthesize activityIndicator = _activityIndicator;
-
 /*
  * The view loads, set the timer
  */

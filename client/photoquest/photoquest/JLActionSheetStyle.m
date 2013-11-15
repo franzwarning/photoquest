@@ -58,8 +58,8 @@
       
       if (style == JLSTYLE_SUPERCLEAN)
       {
-        _cancelBGColor          = [UIColor colorWithRed:0.56f green:0.25f blue:0.69f alpha:1.00f];;
-        _cancelHighlightedBG    = [UIColor colorWithRed:0.58f green:0.25f blue:0.72f alpha:1.00f];;
+        _cancelBGColor          = Color(220, 220, 220, 1.0);
+        _cancelHighlightedBG    = Color(205, 205, 205, 1.0);
       }
       else
       {
@@ -74,8 +74,8 @@
       _textColor              = Color(40, 40, 40, 1.0);
       _textShadowColor        = Color(220, 220, 220, .75);
       
-      _cancelTextColor        = [UIColor whiteColor];
-      _cancelTextShadowColor  = [UIColor colorWithWhite:.05 alpha:1.0];
+      _cancelTextColor        = Color(40, 40, 40, 1.0);
+      _cancelTextShadowColor  = Color(220, 220, 220, .75);
     }
     else if (style == JLSTYLE_FERRARI)
     {

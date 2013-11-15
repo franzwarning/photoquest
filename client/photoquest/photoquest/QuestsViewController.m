@@ -19,10 +19,6 @@
 
 @implementation QuestsViewController
 
-@synthesize currentQuests = _currentQuests;
-@synthesize dq = _dq;
-@synthesize tableView = _tableView;
-
 #define QUEST_Y_SPACING 8.0f
 #define QUEST_LABEL_WIDTH 206.0f
 #define QUEST_X_SPACING 20.0f
