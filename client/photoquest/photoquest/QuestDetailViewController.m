@@ -36,6 +36,7 @@
  */
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     
     self.beginQuestButton.layer.cornerRadius = 6.0f;
