@@ -89,7 +89,7 @@
     } else {
         
         // Submit the quest
-        
+        NSLog(@"User wants to submit a photo");
         
     }
 }
