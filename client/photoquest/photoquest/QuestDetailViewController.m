@@ -63,7 +63,7 @@
     }
     
     // Adjust the size of the label accordingly
-    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
+    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999); 
     CGSize expectedLabelSize = [self.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:19] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
     
     // Do the spacing for the quests

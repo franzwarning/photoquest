@@ -17,11 +17,8 @@
                 clientKey:@"qjVw5kWxxzzdyCOy1YqpZnazNnPixCvhdAdGfTaI"];
   [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
   
-  bool firstTime = true;
-  if ([[NSUserDefaults standardUserDefaults] valueForKey:@"firstTime"]) firstTime = false;
-  
   // On every app startup, authenticate the player
-  if (!firstTime) [self authenticateLocalPlayer];
+  [self authenticateLocalPlayer];
   
   //  // Register for push notifications
   //  [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];

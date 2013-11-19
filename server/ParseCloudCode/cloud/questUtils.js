@@ -2,9 +2,10 @@
  * Get the daily quest
  */
 exports.getDailyQuest = function(request, response) {
-	var query = new Parse.Query("DailyQuest");
+	var query = new Parse.Query("Quest");
 	var forDate = request.params.forDate;
 	
+	query.equalTo("isDaily", true);
 	query.equalTo("forDate", forDate);
 	query.limit(1); // We only want to see the last date
 	query.find({
@@ -21,13 +22,15 @@ exports.getDailyQuest = function(request, response) {
 	});
 };
 
-///
-/// WARNING: THIS FUNCTION IS DESTRUCTIVE
-/// 
+/*
+ * Replaces every (non-daily) quest in the table with information from the JSON file
+ */ 
 exports.uploadQuestJSON = function(request, response)  {
 
 	// First remove all the current quests
 	var query = new Parse.Query("Quest");
+	query.equalTo("isDaily", false);
+
 	query.find({
 		success: function(results) {
 			for (var i = 0; i < results.length; i++) {
@@ -75,4 +78,4 @@ exports.uploadQuestJSON = function(request, response)  {
 			}
 		});
 	}
-});
+};
