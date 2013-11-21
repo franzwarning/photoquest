@@ -2,22 +2,22 @@
 //  Quest.m
 //  photoquest
 //
-//  Created by Raymond Kennedy on 8/4/13.
+//  Created by Raymond kennedy on 11/20/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
 #import "Quest.h"
-#import "Photo.h"
+#import "Submission.h"
 
 
 @implementation Quest
 
 @dynamic hasCompleted;
 @dynamic inProgress;
-@dynamic isDaily;
-@dynamic questId;
+@dynamic parseId;
 @dynamic text;
 @dynamic xp;
-@dynamic photos;
+@dynamic forDate;
+@dynamic submissions;
 
 @end

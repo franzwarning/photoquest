@@ -13,7 +13,7 @@
 /*
  * Check if two dates are the same day
  */
-- (BOOL)isSameDay:(NSDate*)otherDate {
+- (BOOL)isSameDay:(NSDate *)otherDate {
   NSCalendar* calendar = [NSCalendar currentCalendar];
   
   unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;

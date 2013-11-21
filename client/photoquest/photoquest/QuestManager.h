@@ -11,14 +11,13 @@
 #import "Quest.h"
 #import "JSONKit.h"
 #import "DataManager.h"
-#import "DailyQuest.h"
 #import "NSDate+Utils.h"
 
 @protocol QuestManagerDelegate <NSObject>
 
 @required
 
-- (void)foundDailyQuest:(DailyQuest *)dailyQuest;
+- (void)foundDailyQuest:(Quest *)dailyQuest;
 - (void)failedToGetDailyQuest;
 
 @end
@@ -27,7 +26,7 @@
 
 @property (nonatomic, strong) id <QuestManagerDelegate> delegate;
 
-- (NSArray *)getCurrentQuests;
+- (void)getDailyQuest;
 + (id)sharedManager;
 
 @end

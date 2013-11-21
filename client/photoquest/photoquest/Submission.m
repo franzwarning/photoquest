@@ -1,21 +1,23 @@
 //
-//  Photo.m
+//  Submission.m
 //  photoquest
 //
-//  Created by Raymond Kennedy on 8/4/13.
+//  Created by Raymond kennedy on 11/20/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
-#import "Photo.h"
+#import "Submission.h"
 #import "Quest.h"
 #import "User.h"
 
 
-@implementation Photo
+@implementation Submission
 
 @dynamic creationDate;
-@dynamic localURL;
-@dynamic webURL;
+@dynamic imageURL;
+@dynamic parseId;
+@dynamic upVotes;
+@dynamic downVotes;
 @dynamic owner;
 @dynamic quest;
 

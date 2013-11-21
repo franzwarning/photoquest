@@ -1,8 +1,8 @@
 //
-//  Photo.h
+//  Submission.h
 //  photoquest
 //
-//  Created by Raymond Kennedy on 8/4/13.
+//  Created by Raymond kennedy on 11/20/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
@@ -11,11 +11,13 @@
 
 @class Quest, User;
 
-@interface Photo : NSManagedObject
+@interface Submission : NSManagedObject
 
 @property (nonatomic, retain) NSDate * creationDate;
-@property (nonatomic, retain) NSString * localURL;
-@property (nonatomic, retain) NSString * webURL;
+@property (nonatomic, retain) NSString * imageURL;
+@property (nonatomic, retain) NSString * parseId;
+@property (nonatomic, retain) NSNumber * upVotes;
+@property (nonatomic, retain) NSNumber * downVotes;
 @property (nonatomic, retain) User *owner;
 @property (nonatomic, retain) Quest *quest;
 

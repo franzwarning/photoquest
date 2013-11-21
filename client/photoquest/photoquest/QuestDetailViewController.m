@@ -55,8 +55,8 @@
     
     // Setup the labels
     if (self.isDaily) {
-        self.questLabel.text = self.dailyQuest.text;
-        self.xpLabel.text = [NSString stringWithFormat:@"%02d XP", self.dailyQuest.xp];
+//        self.questLabel.text = self.dailyQuest.text;
+//        self.xpLabel.text = [NSString stringWithFormat:@"%02d XP", self.dailyQuest.xp];
     } else {
         self.questLabel.text = self.currentQuest.text;
         self.xpLabel.text = [NSString stringWithFormat:@"%02d XP", [self.currentQuest.xp intValue]];

@@ -5,9 +5,9 @@ exports.getDailyQuest = function(request, response) {
 	var query = new Parse.Query("Quest");
 	var forDate = request.params.forDate;
 	
-	query.equalTo("isDaily", true);
 	query.equalTo("forDate", forDate);
 	query.limit(1); // We only want to see the last date
+
 	query.find({
 		success: function(results) {
 			if (results.length > 0) {

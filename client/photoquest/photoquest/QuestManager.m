@@ -10,11 +10,6 @@
 
 @implementation QuestManager
 
-@synthesize delegate = _delegate;
-
-static bool hasParsed = false;
-static DailyQuest *dailyQuest;
-
 // Get the shared instance and create it if necessary.
 + (QuestManager *)sharedManager {
     static QuestManager *sharedManager = nil;
@@ -25,102 +20,81 @@ static DailyQuest *dailyQuest;
     return sharedManager;
 }
 
-// Get the current [4] quests to show the user (and fetch the daily quest)
-- (NSArray *)getCurrentQuests
-{
-    [self getDailyQuest];
-    
-    // Get the Moc
-    NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
-    
-    // Parse the quests into coredata if we have yet to do so.
-    if (!hasParsed) {
-        
-        // Parse the JSON and put it in core data
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"quests" ofType:@"json.txt"];
-        NSString *jsonString = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error: NULL];
-        
-        // Get the data into an NSDictionary
-        NSDictionary *deserializedData = [jsonString objectFromJSONString];
-        NSArray *quests = [deserializedData objectForKey:@"quests"];
-        for (int i = 0; i < [quests count]; i++) {
-            NSDictionary *questDictionary = [quests objectAtIndex:i];
-            int questId = [[questDictionary objectForKey:@"id"] intValue];
-            NSString *questText = [questDictionary objectForKey:@"quest"];
-            int questXp = [[questDictionary objectForKey:@"xp"] intValue];
-            
-            Quest *currentQuest = nil;
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"questId == %d", questId];
-            NSFetchRequest *request = [[NSFetchRequest alloc] init];
-            [request setEntity:[NSEntityDescription entityForName:@"Quest" inManagedObjectContext:moc]];
-            [request setPredicate:predicate];
-            NSError *error = nil;
-            NSArray *results = [moc executeFetchRequest:request error:&error];
-            if (![results count] || !results) {
-                currentQuest = (Quest *)[NSEntityDescription insertNewObjectForEntityForName:@"Quest" inManagedObjectContext:moc];
-                currentQuest.text = questText;
-                currentQuest.xp = [NSNumber numberWithInt:questXp];
-                currentQuest.questId = [NSNumber numberWithInt:questId];
-                currentQuest.hasCompleted = [NSNumber numberWithBool:false];
-            } else if ([results count] == 1){
-                currentQuest = [results lastObject];
-                currentQuest.text = questText;
-                currentQuest.xp = [NSNumber numberWithInt:questXp];
-            } else {
-                NSLog(@"[FATAL] - More than one quest exists with id: %d", questId);
-            }
-        }
-        NSError *saveError = nil;
-        if (![moc save:&saveError]) NSLog(@"Error saving managedobjectcontext: %@", saveError.localizedDescription);
-        
-        hasParsed = true;
-    }
-    
-    // Now fetch the quests from CoreData
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hasCompleted == false"];
-    NSSortDescriptor *sortById = [NSSortDescriptor sortDescriptorWithKey:@"questId" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObject:sortById]];
-    [request setFetchLimit:4];
-    [request setPredicate:predicate];
-    [request setEntity:[NSEntityDescription entityForName:@"Quest" inManagedObjectContext:moc]];
-    NSError *error = nil;
-    return [moc executeFetchRequest:request error:&error];
-}
-
+/*
+ * Get the daily quest either by querying parse.com or checking in core data...
+ */
 - (void)getDailyQuest
 {
-    bool hasQuest = false;
-    if (dailyQuest) {
-        if (!dailyQuest.forDate) NSLog(@"Dailyquest.text == %@", dailyQuest.text);
-        if ([[NSDate date] isSameDay:dailyQuest.forDate])
-        {
-            NSLog(@"QUEST IS SAME DAY");
-            hasQuest = true;
-        }
-    }
+    Quest *dailyQuest = [self getDailyQuestFromCoreData];
     
-    if (hasQuest) {
-        NSLog(@"ALREADY HAS THE QUEST");
+    if (dailyQuest) {
+        
+        NSLog(@"Found the daily quest in core data...");
+        // We already found the daily quest
         [self.delegate foundDailyQuest:dailyQuest];
+        
     } else {
+        
+        NSLog(@"Searching for daily quest on parse...");
         [PFCloud callFunctionInBackground:@"getDailyQuest" withParameters:@{@"forDate":[[NSDate date] strippedDate]} block:^(id result, NSError *error) {
             if (!error) {
                 if (result) {
-                    if (!dailyQuest) dailyQuest = [[DailyQuest alloc] init];
-                    dailyQuest.text = [(NSDictionary *)result objectForKey:@"text"];
-                    dailyQuest.xp = [[(NSDictionary *)result objectForKey:@"xp"] intValue];
-                    dailyQuest.forDate = [(NSDictionary *)result objectForKey:@"forDate"];
-                    [self.delegate foundDailyQuest:dailyQuest];
+                    
+                    NSLog(@"Found daily quest on parse...");
+                    // We found the quest -- add it to core data and return it to the delegate
+                    [self.delegate foundDailyQuest:[self addQuestToCoreData:result]];
                 }
             } else {
-                dailyQuest = nil;
                 [self.delegate failedToGetDailyQuest];
             }
         }];
     }
 }
 
+/*
+ * A check to see if we already have the daily quest
+ */
+- (Quest *)getDailyQuestFromCoreData
+{
+    NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"forDate == %@", [[NSDate date] strippedDate]];
+    [request setFetchLimit:1];
+    [request setPredicate:predicate];
+    [request setEntity:[NSEntityDescription entityForName:@"Quest" inManagedObjectContext:moc]];
+    
+    NSError *error = nil;
+    NSArray *results = [moc executeFetchRequest:request error:&error];
+    
+    if (![results count] || !results) {
+        return nil;
+    } else if ([results count] == 1) {
+        return [results lastObject];
+    } else {
+        // We encountered a fatal error
+        NSLog(@"[FATAL] -- found more than one daily quest for date: %@", [[NSDate date] strippedDate]);
+        return nil;
+    }
+}
 
+/*
+ * Add the quest to core data if we don't already have it
+ */
+- (Quest *)addQuestToCoreData:(id)result
+{
+    NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
+
+    Quest *newQuest = (Quest *)[NSEntityDescription insertNewObjectForEntityForName:@"Quest" inManagedObjectContext:moc];
+    newQuest.text = [(NSDictionary *)result objectForKey:@"text"];
+    newQuest.xp = [NSNumber numberWithInt:[[(NSDictionary *)result objectForKey:@"xp"] intValue]];
+    newQuest.forDate = [(NSDictionary *)result objectForKey:@"forDate"];
+    newQuest.parseId = [(PFObject *)result objectId];
+    
+    NSLog(@"Result: %@", result);
+    NSLog(@"Added quest with parse id: %@", newQuest.parseId);
+    
+    return newQuest;
+}
 
 @end

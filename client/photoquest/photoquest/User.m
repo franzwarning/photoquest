@@ -2,12 +2,12 @@
 //  User.m
 //  photoquest
 //
-//  Created by Raymond Kennedy on 8/4/13.
+//  Created by Raymond kennedy on 11/20/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
 #import "User.h"
-#import "Photo.h"
+#import "Submission.h"
 
 
 @implementation User
@@ -15,6 +15,6 @@
 @dynamic gameCenterAlias;
 @dynamic gameCenterId;
 @dynamic xp;
-@dynamic photos;
+@dynamic submissions;
 
 @end

@@ -10,18 +10,24 @@
 
 @interface QuestsViewController () <QuestManagerDelegate>
 
-@property (nonatomic, strong) NSArray *currentQuests;
-@property (nonatomic, strong) DailyQuest *dq;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) Quest *dailyQuest;
+
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UILabel *questLabel;
+@property (nonatomic, weak) IBOutlet UILabel *xpLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIButton *questButton;
+@property (nonatomic, weak) IBOutlet UIView *statsView;
 
 @end
 
 
 @implementation QuestsViewController
 
-#define QUEST_Y_SPACING 8.0f
-#define QUEST_LABEL_WIDTH 206.0f
-#define QUEST_X_SPACING 20.0f
+#define QUEST_LABEL_Y_SPACING 75
+#define QUEST_LABEL_X_SPACING 20
+#define QUEST_LABEL_WIDTH 280
+#define QUEST_LABEL_BOTTOM_PADDING 20
 
 /*
  * The view has finished loading
@@ -31,7 +37,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.dq = nil;
+    // Set the daily quest to nil
+    self.dailyQuest = nil;
+    
+    // Fire the seconds timer
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateDailyQuestTimer) userInfo:nil repeats:YES];
+    [timer fire];
+    
+    // So the timer still fires while scrolling
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    // Fuck with the button look
+    self.questButton.layer.cornerRadius = 6.0f;
+    self.questButton.layer.borderColor = [UIColor colorWithRed:0.18f green:0.80f blue:0.44f alpha:1.00f].CGColor;
+    self.questButton.layer.borderWidth = 3.0f;
+    [self.questButton.layer setMasksToBounds:YES];
 }
 
 /*
@@ -43,27 +63,56 @@
     
     // Get the current quests the user is working on
     [[QuestManager sharedManager] setDelegate:self];
-    self.currentQuests = [[QuestManager sharedManager] getCurrentQuests];
+    [[QuestManager sharedManager] getDailyQuest];
+    
+    if (!self.dailyQuest) {
+        [self changeQuestText:@"Loading..."];
+    }
+}
+
+/*
+ * Adjusts the quest label height and animates the change (if any)
+ */
+- (void)changeQuestText:(NSString *)text;
+{
+    if ([text isEqualToString:self.questLabel.text]) return;
+    
+    // Adjust the size of the label accordingly
+    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
+    CGSize expectedLabelSize = [text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:19] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
+    
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.4f;
+    animation.type = kCATransitionPush;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [self.questLabel.layer addAnimation:animation forKey:@"changeTextTransition"];
+    self.questLabel.text = text;
+    
+    [self.questLabel setFrame:CGRectMake(QUEST_LABEL_X_SPACING, QUEST_LABEL_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height)];
+    
+    // Make sure the stat height is the right place
+    [self updateStatViewHeight];
+}
+
+/*
+ * Update stats view height
+ */
+- (void)updateStatViewHeight
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.statsView setFrame:CGRectMake(QUEST_LABEL_X_SPACING, self.questLabel.frame.origin.y + self.questLabel.frame.size.height + QUEST_LABEL_BOTTOM_PADDING, self.statsView.frame.size.width, self.statsView.frame.size.height)];
+    } completion:^(BOOL finished) {}];
 }
 
 /*
  * Called from QuestManager.h
  */
-- (void)foundDailyQuest:(DailyQuest *)dailyQuest
+- (void)foundDailyQuest:(Quest *)dailyQuest
 {
-    if (!self.dq  || ![dailyQuest.text isEqualToString:self.dq.text]) {
-        self.dq = dailyQuest;
-        [self.tableView beginUpdates];
-        [self.tableView endUpdates];
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];
-        
-        // Setup the timer
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateDailyQuestTimer) userInfo:nil repeats:YES];
-        [timer fire];
-        
-        // So the timer still fires while scrolling
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    }
+    self.dailyQuest = dailyQuest;
+    [self changeQuestText:self.dailyQuest.text];
+    
+    NSLog(@"Daily Quest: %@", dailyQuest.text);
 }
 
 /*
@@ -76,8 +125,7 @@
     int mins = 59 - [referenceDate minute];
     int seconds = 59 - [referenceDate second];
     
-    DailyQuestCell *dqc = (DailyQuestCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    dqc.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hours, mins, seconds];
+    self.timeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", hours, mins, seconds];
 }
 
 /*
@@ -85,115 +133,10 @@
  */
 - (void)failedToGetDailyQuest
 {
+    self.dailyQuest = nil;
+    [self changeQuestText:@"We probably forgot to set the quest..."];
+    
     NSLog(@"Failed to get the daily quest...");
-}
-
-
-#pragma TableViewDataSource
-
-/*
- * Called for every cell in the table view
- */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    NSString *cellIdentifier = @"";
-    
-    if (indexPath.row == 0) {
-        // Release a daily quest cell
-        cellIdentifier = @"DailyQuestCell";
-        
-        DailyQuestCell *dqc = (DailyQuestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if (self.dq) {
-            dqc.questLabel.text = self.dq.text;
-            dqc.xpView.hidden = NO;
-            dqc.timeView.hidden = NO;
-            dqc.xpLabel.text = [NSString stringWithFormat:@"%d XP", self.dq.xp];
-            
-        } else {
-            dqc.questLabel.text = @"Loading...";
-            dqc.xpView.hidden = YES;
-            dqc.timeView.hidden = YES;
-        }
-        
-        // Adjust the size of the label accordingly
-        CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
-        CGSize expectedLabelSize = [dqc.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
-        [dqc.questLabel setFrame:CGRectMake(QUEST_X_SPACING, QUEST_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height + 1)];
-        
-        return dqc;
-    } else {
-        // Release a default quest cell
-        cellIdentifier = @"DefaultQuestCell";
-        
-        DefaultQuestCell *dqc = (DefaultQuestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        Quest *currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
-        
-        dqc.questLabel.text = currentQuest.text;
-        dqc.xpLabel.text = [NSString stringWithFormat:@"%d XP", [currentQuest.xp intValue]];
-
-        // Adjust the size of the label accordingly
-        CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
-        CGSize expectedLabelSize = [dqc.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
-        [dqc.questLabel setFrame:CGRectMake(QUEST_X_SPACING, QUEST_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height + 1)];
-        
-        return dqc;
-    }
-    
-    return nil;
-}
-
-/*
- * Get the number of rows in a given section in the table view
- */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return ([self.currentQuests count] + 1);
-}
-
-/*
- * Get the height for each row @ index path
- */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *questText = @"";
-    if (indexPath.row == 0) {
-        if (self.dq) questText = self.dq.text;
-        else questText = @"Loading...";
-    } else {
-        Quest *currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
-        questText = currentQuest.text;
-    }
-    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999);
-    CGSize expectedLabelSize = [questText sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:17] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
-    return MAX(50, (2 * QUEST_Y_SPACING) + expectedLabelSize.height + 1);
-}
-
-/*
- * To hide the extra rows in the table view.
- */
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    // This will create a "invisible" footer
-    return 0.01f;
-}
-
-/*
- * After selecting a row
- */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    QuestDetailViewController *qdvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestDetailViewController"];
-    
-    if (indexPath.row == 0) {
-        qdvc.isDaily = YES;
-        qdvc.dailyQuest = self.dq;
-    } else {
-        qdvc.isDaily = NO;
-        qdvc.currentQuest = [self.currentQuests objectAtIndex:(indexPath.row - 1)];
-    }
-    
-    [self.navigationController pushViewController:qdvc animated:YES];
 }
 
 

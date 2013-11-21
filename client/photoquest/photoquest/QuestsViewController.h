@@ -10,11 +10,10 @@
 #import <sys/semaphore.h>
 #import "QuestManager.h"
 #import "Quest.h"
-#import "DailyQuest.h"
 #import "QuestDetailViewController.h"
 #import "DailyQuestCell.h"
 #import "DefaultQuestCell.h"
 
-@interface QuestsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface QuestsViewController : UIViewController
 
 @end

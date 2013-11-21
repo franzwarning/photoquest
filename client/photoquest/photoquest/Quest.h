@@ -2,31 +2,31 @@
 //  Quest.h
 //  photoquest
 //
-//  Created by Raymond Kennedy on 8/4/13.
+//  Created by Raymond kennedy on 11/20/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Photo;
+@class Submission;
 
 @interface Quest : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * hasCompleted;
 @property (nonatomic, retain) NSNumber * inProgress;
-@property (nonatomic, retain) NSNumber * isDaily;
-@property (nonatomic, retain) NSNumber * questId;
+@property (nonatomic, retain) NSString * parseId;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSNumber * xp;
-@property (nonatomic, retain) NSSet *photos;
+@property (nonatomic, retain) NSDate * forDate;
+@property (nonatomic, retain) NSSet *submissions;
 @end
 
 @interface Quest (CoreDataGeneratedAccessors)
 
-- (void)addPhotosObject:(Photo *)value;
-- (void)removePhotosObject:(Photo *)value;
-- (void)addPhotos:(NSSet *)values;
-- (void)removePhotos:(NSSet *)values;
+- (void)addSubmissionsObject:(Submission *)value;
+- (void)removeSubmissionsObject:(Submission *)value;
+- (void)addSubmissions:(NSSet *)values;
+- (void)removeSubmissions:(NSSet *)values;
 
 @end
