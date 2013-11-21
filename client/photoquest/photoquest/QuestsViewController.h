@@ -11,8 +11,6 @@
 #import "QuestManager.h"
 #import "Quest.h"
 #import "QuestDetailViewController.h"
-#import "DailyQuestCell.h"
-#import "DefaultQuestCell.h"
 
 @interface QuestsViewController : UIViewController
 
