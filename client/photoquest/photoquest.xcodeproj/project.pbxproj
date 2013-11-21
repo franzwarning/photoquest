@@ -39,8 +39,6 @@
 		AFA0E52B1831A7160081D5D2 /* person-stalker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFA0E5291831A7160081D5D2 /* person-stalker@2x.png */; };
 		AFA0E52D1831AA280081D5D2 /* QuestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0E52C1831AA280081D5D2 /* QuestsViewController.m */; };
 		AFA0E5301831AB2A0081D5D2 /* QuestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0E52E1831AB2A0081D5D2 /* QuestDetailViewController.m */; };
-		AFA0E5341831AC5C0081D5D2 /* DefaultQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0E5331831AC5C0081D5D2 /* DefaultQuestCell.m */; };
-		AFA0E5371831AC680081D5D2 /* DailyQuestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA0E5361831AC680081D5D2 /* DailyQuestCell.m */; };
 		AFAC11871791F02600B57F1B /* ProfileNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAC11861791F02600B57F1B /* ProfileNavigationController.m */; };
 		AFCEC885178291D30052FD3E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCEC884178291D30052FD3E /* GameKit.framework */; };
 		AFCEC88F1782941C0052FD3E /* JLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCEC88A1782941C0052FD3E /* JLActionButton.m */; };
@@ -133,10 +131,6 @@
 		AFA0E52C1831AA280081D5D2 /* QuestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestsViewController.m; sourceTree = "<group>"; };
 		AFA0E52E1831AB2A0081D5D2 /* QuestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestDetailViewController.m; sourceTree = "<group>"; };
 		AFA0E52F1831AB2A0081D5D2 /* QuestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestDetailViewController.h; sourceTree = "<group>"; };
-		AFA0E5321831AC5C0081D5D2 /* DefaultQuestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultQuestCell.h; sourceTree = "<group>"; };
-		AFA0E5331831AC5C0081D5D2 /* DefaultQuestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultQuestCell.m; sourceTree = "<group>"; };
-		AFA0E5351831AC680081D5D2 /* DailyQuestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyQuestCell.h; sourceTree = "<group>"; };
-		AFA0E5361831AC680081D5D2 /* DailyQuestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyQuestCell.m; sourceTree = "<group>"; };
 		AFAC11851791F02600B57F1B /* ProfileNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNavigationController.h; sourceTree = "<group>"; };
 		AFAC11861791F02600B57F1B /* ProfileNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileNavigationController.m; sourceTree = "<group>"; };
 		AFCEC884178291D30052FD3E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -240,10 +234,6 @@
 		AFA0E5311831AC3F0081D5D2 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				AFA0E5321831AC5C0081D5D2 /* DefaultQuestCell.h */,
-				AFA0E5331831AC5C0081D5D2 /* DefaultQuestCell.m */,
-				AFA0E5351831AC680081D5D2 /* DailyQuestCell.h */,
-				AFA0E5361831AC680081D5D2 /* DailyQuestCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -575,7 +565,6 @@
 				AFCEC8901782941C0052FD3E /* JLActionSheet.m in Sources */,
 				AFCEC8911782941C0052FD3E /* JLActionSheetStyle.m in Sources */,
 				AFCEC894178294750052FD3E /* GCLoginViewController.m in Sources */,
-				AFA0E5341831AC5C0081D5D2 /* DefaultQuestCell.m in Sources */,
 				30FC9E4A1787AEE5005DA0E5 /* RateNavigationController.m in Sources */,
 				30FC9E4D1787AF56005DA0E5 /* RateViewController.m in Sources */,
 				AF06A5FE182EF78A00220BA9 /* MainTabBarController.m in Sources */,
@@ -593,7 +582,6 @@
 				AFE7EAAE1832EFFF0025A5E0 /* UIColor+ColorWithHex.m in Sources */,
 				AFED368617927A260090FFA4 /* BebasLabel.m in Sources */,
 				AFE2738D17931B99004A31A5 /* Model.xcdatamodeld in Sources */,
-				AFA0E5371831AC680081D5D2 /* DailyQuestCell.m in Sources */,
 				AFE273AE179322F2004A31A5 /* QuestManager.m in Sources */,
 				AFA0E52D1831AA280081D5D2 /* QuestsViewController.m in Sources */,
 				AFE273B1179326F0004A31A5 /* JSONKit.m in Sources */,
