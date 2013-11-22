@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Quests Navigation Controller - Quests-->
+        <!--Quests Navigation Controller - Quest-->
         <scene sceneID="4dQ-lw-hzw">
             <objects>
                 <navigationController storyboardIdentifier="QuestsNavigationController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jkT-Bw-6eZ" customClass="QuestsNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quests" image="questsTab.png" id="3cB-uR-Qr3"/>
+                    <tabBarItem key="tabBarItem" title="Quest" image="ios7-camera-outline.png" id="3cB-uR-Qr3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oHI-LL-gPx">
                         <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -124,7 +124,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="questButtonPressed:" destination="Hec-5d-lw6" eventType="touchUpInside" id="eF4-k7-60W"/>
+                                            <action selector="questButtonHit:" destination="2" eventType="touchUpInside" id="NsM-P2-NXp"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -290,105 +290,65 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tz1-CL-4FR">
-                                        <rect key="frame" x="20" y="158" width="280" height="280"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" id="Tz1-CL-4FR">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="67V-Ai-ZTh">
-                                        <rect key="frame" x="20" y="158" width="280" height="280"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1003" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiN-Us-ulf">
-                                                <rect key="frame" x="0.0" y="33" width="47" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="attempts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fe3-nt-X9Q">
-                                                <rect key="frame" x="55" y="33" width="132" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="success rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="14U-Lk-Nd3">
-                                                <rect key="frame" x="55" y="58" width="132" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kHr-5w-XZM">
-                                                <rect key="frame" x="0.0" y="58" width="47" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" id="zhD-Y8-Xaa">
-                                                <rect key="frame" x="0.0" y="0.0" width="86" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 XP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xOg-ZA-aqJ">
-                                                        <rect key="frame" x="10" y="2" width="67" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.61176472900000001" green="0.34901961679999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
-                                            </view>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends succeeded" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="esz-b8-zcb">
-                                                <rect key="frame" x="55" y="85" width="141" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="is1-GF-YOA">
-                                                <rect key="frame" x="0.0" y="85" width="47" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                                <color key="textColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is an example of a really long quest just to see how the spacing works out." lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hnf-IJ-6ne">
-                                        <rect key="frame" x="20" y="75" width="280" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PTC-kS-r13">
-                                        <rect key="frame" x="92" y="460" width="137" height="35"/>
+                                        <rect key="frame" x="15" y="392" width="137" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                        <state key="normal" title="Begin Quest">
+                                        <state key="normal" title="Take Photo">
                                             <color key="titleColor" red="0.18039216101169586" green="0.80000007152557373" blue="0.43921571969985962" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="questButtonPressed:" destination="Hec-5d-lw6" eventType="touchUpInside" id="soB-Iz-u0B"/>
+                                            <action selector="takePhotoButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="z98-Bh-fEO"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="axN-68-HGS">
+                                        <rect key="frame" x="145" y="392" width="175" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        <state key="normal" title="Choose Photo">
+                                            <color key="titleColor" red="0.180392161" green="0.80000007149999997" blue="0.43921571970000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="choosePhotoButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="kHk-ez-43m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PUC-ra-Wwd">
+                                        <rect key="frame" x="84" y="435" width="153" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submitButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="Ols-oD-hED"/>
+                                        </connections>
+                                    </button>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" id="hGr-g1-cU2">
+                                        <rect key="frame" x="0.0" y="515" width="320" height="3"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </progressView>
                                 </subviews>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="quest" id="2TZ-bV-UnC"/>
+                    <navigationItem key="navigationItem" title="submit" id="2TZ-bV-UnC"/>
                     <connections>
+                        <outlet property="chosePhotoButton" destination="axN-68-HGS" id="gY5-NX-OgX"/>
                         <outlet property="imageView" destination="Tz1-CL-4FR" id="Wwg-wm-F9x"/>
-                        <outlet property="questButton" destination="PTC-kS-r13" id="Il6-kA-y9M"/>
-                        <outlet property="questLabel" destination="hnf-IJ-6ne" id="jsd-3p-lBV"/>
+                        <outlet property="progressView" destination="hGr-g1-cU2" id="9qg-ya-JGK"/>
                         <outlet property="scrollView" destination="iX8-dU-jfo" id="sbY-KV-MdP"/>
-                        <outlet property="statsView" destination="67V-Ai-ZTh" id="bJ5-SR-IHm"/>
-                        <outlet property="xpLabel" destination="xOg-ZA-aqJ" id="jaS-la-RaG"/>
+                        <outlet property="submitButton" destination="PUC-ra-Wwd" id="hv2-d1-shg"/>
+                        <outlet property="takePhotoButton" destination="PTC-kS-r13" id="mP0-w9-Ll0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETD-BN-PIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -465,9 +425,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ios7-camera-outline.png" width="30" height="30"/>
         <image name="person-stalker.png" width="30" height="30"/>
         <image name="person.png" width="30" height="30"/>
-        <image name="questsTab.png" width="30" height="30"/>
+        <image name="placeholder.png" width="320" height="320"/>
         <image name="stats-bars.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

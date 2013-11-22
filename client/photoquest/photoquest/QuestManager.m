@@ -83,6 +83,7 @@
  */
 - (Quest *)addQuestToCoreData:(id)result
 {
+    NSLog(@"Adding the quest to core data....");
     NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
 
     Quest *newQuest = (Quest *)[NSEntityDescription insertNewObjectForEntityForName:@"Quest" inManagedObjectContext:moc];
@@ -93,6 +94,9 @@
     
     NSLog(@"Result: %@", result);
     NSLog(@"Added quest with parse id: %@", newQuest.parseId);
+    
+    NSError *saveError = nil;
+    if (![moc save:&saveError]) NSLog(@"Error saving managedobjectcontext: %@", saveError.localizedDescription);
     
     return newQuest;
 }

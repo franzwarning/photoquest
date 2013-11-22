@@ -10,23 +10,16 @@
 
 @interface QuestDetailViewController ()
 
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, weak) IBOutlet UILabel *questLabel;
-@property (nonatomic, weak) IBOutlet UILabel *xpLabel;
-@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property (nonatomic, weak) IBOutlet UIView *timeView;
-@property (nonatomic, weak) IBOutlet UIButton *questButton;
-@property (nonatomic, weak) IBOutlet UIView *statsView;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIButton *submitButton;
+@property (nonatomic, weak) IBOutlet UIButton *takePhotoButton;
+@property (nonatomic, weak) IBOutlet UIButton *chosePhotoButton;
+@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @end
 
 @implementation QuestDetailViewController
-
-#define QUEST_LABEL_Y_SPACING 75
-#define QUEST_LABEL_X_SPACING 20
-#define QUEST_LABEL_WIDTH 280
-#define QUEST_LABEL_BOTTOM_PADDING 20
 
 /*
  * Called when the view first loads
@@ -34,16 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.questButton.layer.cornerRadius = 6.0f;
-    self.questButton.layer.borderColor = [UIColor colorWithRed:0.18f green:0.80f blue:0.44f alpha:1.00f].CGColor;
-    self.questButton.layer.borderWidth = 3.0f;
-    [self.questButton.layer setMasksToBounds:YES];
-    
-    self.imageView.layer.cornerRadius = 3.0f;
-    self.imageView.layer.borderColor = [UIColor colorWithRed:0.93f green:0.94f blue:0.95f alpha:1.00f].CGColor;
-    self.imageView.layer.borderWidth = 3.0f;
-    [self.imageView.layer setMasksToBounds:YES];
 }
 
 /*
@@ -53,72 +36,10 @@
 {
     [super viewWillAppear:animated];
     
-    // Setup the labels
-    if (self.isDaily) {
-//        self.questLabel.text = self.dailyQuest.text;
-//        self.xpLabel.text = [NSString stringWithFormat:@"%02d XP", self.dailyQuest.xp];
-    } else {
-        self.questLabel.text = self.currentQuest.text;
-        self.xpLabel.text = [NSString stringWithFormat:@"%02d XP", [self.currentQuest.xp intValue]];
-    }
-    
-    // Adjust the size of the label accordingly
-    CGSize maximumLabelSize = CGSizeMake(QUEST_LABEL_WIDTH, 9999); 
-    CGSize expectedLabelSize = [self.questLabel.text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:19] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByTruncatingTail];
-    
-    // Do the spacing for the quests
-    [self.questLabel setFrame:CGRectMake(QUEST_LABEL_X_SPACING, QUEST_LABEL_Y_SPACING, self.questLabel.frame.size.width, expectedLabelSize.height + 1)];
-    
-    [self.statsView setFrame:CGRectMake(QUEST_LABEL_X_SPACING, self.questLabel.frame.origin.y + self.questLabel.frame.size.height + QUEST_LABEL_BOTTOM_PADDING, self.statsView.frame.size.height, self.statsView.frame.size.width)];
-    
-    [self.questButton setFrame:CGRectMake(self.questButton.frame.origin.x, self.statsView.frame.origin.y + self.statsView.frame.size.height + QUEST_LABEL_BOTTOM_PADDING, self.questButton.frame.size.width, self.questButton.frame.size.height)];
-    
-    if (self.imageView.image) self.statsView.hidden = YES;
-    else self.imageView.hidden = YES;
-}
+    [self.tabBarController.tabBar setHidden:YES];
 
-/*
- * Begin quest button pressed
- */
-- (IBAction)questButtonPressed:(id)sender
-{
-    if ([self.questButton.titleLabel.text isEqualToString:@"Begin Quest"]) {
-        JLActionSheet *actnSheet = [JLActionSheet sheetWithTitle:@"Select a source" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObjects:@"Camera", @"Photo Library", nil]];
-        [actnSheet setStyle:JLSTYLE_SUPERCLEAN];
-        [actnSheet showInView:self.view];
-    } else {
-        
-        // Submit the quest
-        NSLog(@"User wants to submit a photo");
-        
-    }
-}
-
-/*
- * Action sheet delegate methods
- */
-- (void)actionSheet:(JLActionSheet *)actionSheet didDismissButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        // User hit cancel
-    } else {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        
-        if (buttonIndex == 2) {
-            // User wants photo library
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-                [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-            
-        } else if (buttonIndex == 1) {
-            // User wants camera
-            [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        }
-        
-        [picker setAllowsEditing:YES];
-        [picker setDelegate:self];
-        [self presentViewController:picker animated:YES completion:nil];
-        
-    }
+    self.submitButton.hidden = YES;
+    self.progressView.progress = 0.0f;
 }
 
 /*
@@ -129,31 +50,151 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     
     if (image) {
-        // Animate the stats view off and the other view in.
-        [self.imageView setFrame:CGRectMake(-320, self.questLabel.frame.origin.y + self.questLabel.frame.size.height + QUEST_LABEL_BOTTOM_PADDING, self.imageView.frame.size.width, self.imageView.frame.size.height)];
+        
+        self.submitButton.hidden = NO;
+        
         [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
         [self.imageView setImage:image];
         self.imageView.hidden = NO;
         
-        [self.questButton setTitle:@"Submit" forState:UIControlStateNormal];
-        [self.questButton setTitleColor:[UIColor colorWithRed:0.61f green:0.35f blue:0.71f alpha:1.00f] forState:UIControlStateNormal];
-        self.questButton.layer.borderColor = [UIColor colorWithRed:0.61f green:0.35f blue:0.71f alpha:1.00f].CGColor;
-        self.questButton.titleLabel.textColor = [UIColor colorWithRed:0.61f green:0.35f blue:0.71f alpha:1.00f];
-        [self animateChange];
     }
 }
 
 /*
- * Animate the stats view off and the quest view on...
+ * When the take photo button is hit
  */
-- (void)animateChange
+- (IBAction)takePhotoButtonHit:(id)sender
 {
-    [UIView animateWithDuration:0.3f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [self.statsView setFrame:CGRectMake(self.statsView.frame.origin.x + 320, self.statsView.frame.origin.y, self.statsView.frame.size.width, self.statsView.frame.size.height)];
-        [self.imageView setFrame:CGRectMake(QUEST_LABEL_X_SPACING, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height)];
-    } completion:^(BOOL completion) {
-        
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [picker setAllowsEditing:YES];
+    [picker setDelegate:self];
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+
+/*
+ * When the choose photo button is hit
+ */
+- (IBAction)choosePhotoButtonHit:(id)sender
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [picker setAllowsEditing:YES];
+    [picker setDelegate:self];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
+/*
+ * When the submitButtonIsHit
+ */
+- (IBAction)submitButtonHit:(id)sender
+{
+    [self uploadPhoto];
+}
+
+/*
+ * Upload the photo to parse
+ */
+- (void)uploadPhoto
+{
+    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0f);
+    NSString *fileName = [NSString stringWithFormat:@"%@-%@", self.currentQuest.parseId, [[PFUser currentUser] objectForKey:@"gameCenterAlias"]];
+    NSLog(@"Uploading image with file name: %@", fileName);
+    
+    PFFile *imageFile = [PFFile fileWithName:fileName data:imageData];
+    
+    //HUD creation here (see example for code)
+    [self setUILoading];
+    
+    // Save PFFile
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+
+            [self.submitButton setTitle:@"Finishing Up..." forState:UIControlStateNormal];
+
+            // Create a PFObject around a PFFile and associate it with the current user
+            PFObject *userPhoto = [PFObject objectWithClassName:@"Submission"];
+            [userPhoto setObject:imageFile forKey:@"image"];
+            [userPhoto setObject:[PFUser currentUser] forKey:@"owner"];
+            [userPhoto setObject:[PFObject objectWithoutDataWithClassName:@"Quest" objectId:self.currentQuest.parseId] forKey:@"quest"];
+            [userPhoto setObject:[NSNumber numberWithInt:0] forKey:@"upVotes"];
+            [userPhoto setObject:[NSNumber numberWithInt:0] forKey:@"downVotes"];
+
+            [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    [self.submitButton setTitle:@"Done!" forState:UIControlStateNormal];
+                    [self createCoreDataSubmissionForParseObject:userPhoto];
+                    [self performSelector:@selector(leavePage) withObject:nil afterDelay:1.0f];
+                }
+                else{
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+        else{
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    } progressBlock:^(int percentDone) {
+        // Update your progress spinner here. percentDone will be between 0 and 100.
+        self.progressView.progress = (float)percentDone/100;
     }];
+}
+
+//@property (nonatomic, retain) NSDate * creationDate;
+//@property (nonatomic, retain) NSString * imageURL;
+//@property (nonatomic, retain) NSString * parseId;
+//@property (nonatomic, retain) NSNumber * upVotes;
+//@property (nonatomic, retain) NSNumber * downVotes;
+//@property (nonatomic, retain) User *owner;
+//@property (nonatomic, retain) Quest *quest;
+
+/*
+ * Add the submission to xcdata
+ */
+- (void)createCoreDataSubmissionForParseObject:(PFObject *)parseObject
+{
+    // First get the quest object
+    NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
+    Submission *newSubmission = (Submission *)[NSEntityDescription insertNewObjectForEntityForName:@"Submission" inManagedObjectContext:moc];
+    
+    newSubmission.quest = [Quest getQuestForParseId:self.currentQuest.parseId];
+    newSubmission.owner = [User getCurrentUser];
+    newSubmission.upVotes = [NSNumber numberWithInt:0];
+    newSubmission.downVotes = [NSNumber numberWithInt:0];
+    newSubmission.parseId = [parseObject objectId];
+    newSubmission.creationDate = [parseObject createdAt];
+    
+    NSError *saveError = nil;
+    if (![moc save:&saveError]) NSLog(@"Error saving managedobjectcontext: %@", saveError.localizedDescription);
+    else  NSLog(@"Created new submission in core data with objectid: %@", newSubmission.parseId);
+    
+}
+
+/*
+ * Leaves the page -- called after image uploading is complete
+ */
+- (void)leavePage
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/*
+ * Set the ui for image uploading
+ */
+- (void)setUILoading
+{
+    // Disable all the buttons
+    self.submitButton.enabled = NO;
+    self.takePhotoButton.enabled = NO;
+    self.submitButton.enabled = NO;
+    [self.submitButton setTitle:@"Loading..." forState:UIControlStateNormal];
+    self.title = @"submitting...";
+    
+    self.navigationItem.hidesBackButton = YES;
 }
 
 @end

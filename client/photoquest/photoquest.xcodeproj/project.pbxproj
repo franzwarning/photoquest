@@ -20,6 +20,11 @@
 		AF4F80F7183DEAB600916E7D /* Submission.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80F6183DEAB600916E7D /* Submission.m */; };
 		AF4F80FA183DEAB700916E7D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80F9183DEAB700916E7D /* User.m */; };
 		AF4F80FD183DEAB700916E7D /* Quest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80FC183DEAB700916E7D /* Quest.m */; };
+		AF4F8100183EB5AC00916E7D /* ios7-camera-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F80FE183EB5AC00916E7D /* ios7-camera-outline.png */; };
+		AF4F8101183EB5AC00916E7D /* ios7-camera-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F80FF183EB5AC00916E7D /* ios7-camera-outline@2x.png */; };
+		AF4F8104183EB83400916E7D /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F8102183EB83400916E7D /* placeholder.png */; };
+		AF4F8105183EB83400916E7D /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F8103183EB83400916E7D /* placeholder@2x.png */; };
+		AF4F8108183ED3B300916E7D /* Quest+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F8107183ED3B300916E7D /* Quest+Utils.m */; };
 		AF6D0CD017B0D45F008CD61E /* beginQuestButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCC17B0D45F008CD61E /* beginQuestButton.png */; };
 		AF6D0CD117B0D45F008CD61E /* beginQuestButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCD17B0D45F008CD61E /* beginQuestButton@2x.png */; };
 		AF6D0CD217B0D45F008CD61E /* beginQuestButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCE17B0D45F008CD61E /* beginQuestButtonPressed.png */; };
@@ -110,6 +115,12 @@
 		AF4F80F9183DEAB700916E7D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AF4F80FB183DEAB700916E7D /* Quest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quest.h; sourceTree = "<group>"; };
 		AF4F80FC183DEAB700916E7D /* Quest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quest.m; sourceTree = "<group>"; };
+		AF4F80FE183EB5AC00916E7D /* ios7-camera-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-camera-outline.png"; sourceTree = "<group>"; };
+		AF4F80FF183EB5AC00916E7D /* ios7-camera-outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-camera-outline@2x.png"; sourceTree = "<group>"; };
+		AF4F8102183EB83400916E7D /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		AF4F8103183EB83400916E7D /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		AF4F8106183ED3B300916E7D /* Quest+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quest+Utils.h"; sourceTree = "<group>"; };
+		AF4F8107183ED3B300916E7D /* Quest+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quest+Utils.m"; sourceTree = "<group>"; };
 		AF6D0CCC17B0D45F008CD61E /* beginQuestButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beginQuestButton.png; sourceTree = "<group>"; };
 		AF6D0CCD17B0D45F008CD61E /* beginQuestButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beginQuestButton@2x.png"; sourceTree = "<group>"; };
 		AF6D0CCE17B0D45F008CD61E /* beginQuestButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beginQuestButtonPressed.png; sourceTree = "<group>"; };
@@ -227,6 +238,8 @@
 				AFE273CA1793B6EF004A31A5 /* User+Utils.m */,
 				AFD377F117ADB73100326A3D /* NSDate+Utils.h */,
 				AFD377F217ADB73100326A3D /* NSDate+Utils.m */,
+				AF4F8106183ED3B300916E7D /* Quest+Utils.h */,
+				AF4F8107183ED3B300916E7D /* Quest+Utils.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -374,6 +387,10 @@
 		AFF760C317AE07940049FD07 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AF4F8102183EB83400916E7D /* placeholder.png */,
+				AF4F8103183EB83400916E7D /* placeholder@2x.png */,
+				AF4F80FE183EB5AC00916E7D /* ios7-camera-outline.png */,
+				AF4F80FF183EB5AC00916E7D /* ios7-camera-outline@2x.png */,
 				AFA0E5281831A7160081D5D2 /* person-stalker.png */,
 				AFA0E5291831A7160081D5D2 /* person-stalker@2x.png */,
 				AFA0E5241831A6720081D5D2 /* person.png */,
@@ -524,22 +541,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFA0E51F1831A5AC0081D5D2 /* questsTab@2x.png in Resources */,
+				AF4F8104183EB83400916E7D /* placeholder.png in Resources */,
 				AFA0E51E1831A5AC0081D5D2 /* questsTab.png in Resources */,
 				DA6ACEF517801470009C06C5 /* InfoPlist.strings in Resources */,
 				DA6ACEFD17801470009C06C5 /* Default.png in Resources */,
 				DA6ACEFF17801470009C06C5 /* Default@2x.png in Resources */,
 				DA6ACF0117801470009C06C5 /* Default-568h@2x.png in Resources */,
 				DA6ACF0417801470009C06C5 /* MainStoryboard.storyboard in Resources */,
+				AF4F8100183EB5AC00916E7D /* ios7-camera-outline.png in Resources */,
 				AFED367F179247DB0090FFA4 /* Practique.ttf in Resources */,
 				AFED3682179274670090FFA4 /* BebasNeue.otf in Resources */,
 				AFA0E5271831A6720081D5D2 /* person@2x.png in Resources */,
 				AFE273AB1793222E004A31A5 /* levels.json.txt in Resources */,
+				AF4F8101183EB5AC00916E7D /* ios7-camera-outline@2x.png in Resources */,
 				AFF760C517AE081D0049FD07 /* rayfk.png in Resources */,
 				AFA0E5261831A6720081D5D2 /* person.png in Resources */,
 				AFF760CA17AE09C60049FD07 /* 200x200.png in Resources */,
 				AF79B8E917AF645D00D7B264 /* backButton.png in Resources */,
 				AF79B8EA17AF645D00D7B264 /* backButton@2x.png in Resources */,
 				AF79B8EB17AF645D00D7B264 /* backButtonHit.png in Resources */,
+				AF4F8105183EB83400916E7D /* placeholder@2x.png in Resources */,
 				AFA0E5231831A5FE0081D5D2 /* stats-bars@2x.png in Resources */,
 				AFA0E52A1831A7160081D5D2 /* person-stalker.png in Resources */,
 				AF79B8EC17AF645D00D7B264 /* backButtonHit@2x.png in Resources */,
@@ -567,6 +588,7 @@
 				AFCEC894178294750052FD3E /* GCLoginViewController.m in Sources */,
 				30FC9E4A1787AEE5005DA0E5 /* RateNavigationController.m in Sources */,
 				30FC9E4D1787AF56005DA0E5 /* RateViewController.m in Sources */,
+				AF4F8108183ED3B300916E7D /* Quest+Utils.m in Sources */,
 				AF06A5FE182EF78A00220BA9 /* MainTabBarController.m in Sources */,
 				30FC9E531787AFB7005DA0E5 /* ProfileViewController.m in Sources */,
 				AF4F80FD183DEAB700916E7D /* Quest.m in Sources */,

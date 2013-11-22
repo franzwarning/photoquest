@@ -46,12 +46,6 @@
     
     // So the timer still fires while scrolling
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    
-    // Fuck with the button look
-    self.questButton.layer.cornerRadius = 6.0f;
-    self.questButton.layer.borderColor = [UIColor colorWithRed:0.18f green:0.80f blue:0.44f alpha:1.00f].CGColor;
-    self.questButton.layer.borderWidth = 3.0f;
-    [self.questButton.layer setMasksToBounds:YES];
 }
 
 /*
@@ -68,6 +62,10 @@
     if (!self.dailyQuest) {
         [self changeQuestText:@"Loading..."];
     }
+    
+    // Unhide the tab bar
+    [self.tabBarController.tabBar setHidden:NO];
+
 }
 
 /*
@@ -139,5 +137,16 @@
     NSLog(@"Failed to get the daily quest...");
 }
 
+/*
+ * Quest button
+ */
+- (IBAction)questButtonHit:(id)sender
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    QuestDetailViewController *qdvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"QuestDetailViewController"];
+    qdvc.currentQuest = self.dailyQuest;
+    
+    [self.navigationController pushViewController:qdvc animated:YES];
+}
 
 @end
