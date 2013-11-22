@@ -95,11 +95,33 @@
 }
 
 /*
+ * Takes the image and puts it in a 640x640 square #lol
+ */
+- (UIImage *)resizeImage:(UIImage *)imageViewImage
+{
+    float yHeight = (640 - imageViewImage.size.height)/2;
+    NSLog(@"yHeight: %f", yHeight);
+    
+    UIGraphicsBeginImageContext(CGSizeMake(640, 640));
+    
+    // Fill the background with black just in case the image doesn't fill the 640x640 box
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextFillRect(context, CGRectMake(0, 0, 640, 640));
+    
+    [imageViewImage drawInRect: CGRectMake(0, yHeight, imageViewImage.size.width, imageViewImage.size.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return resizedImage;
+}
+
+/*
  * Upload the photo to parse
  */
 - (void)uploadPhoto
 {
-    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0f);
+    NSData *imageData = UIImageJPEGRepresentation([self resizeImage:self.imageView.image], 1.0f);
     NSString *fileName = [NSString stringWithFormat:@"%@-%@", self.currentQuest.parseId, [[PFUser currentUser] objectForKey:@"gameCenterAlias"]];
     NSLog(@"Uploading image with file name: %@", fileName);
     
@@ -143,14 +165,6 @@
         self.progressView.progress = (float)percentDone/100;
     }];
 }
-
-//@property (nonatomic, retain) NSDate * creationDate;
-//@property (nonatomic, retain) NSString * imageURL;
-//@property (nonatomic, retain) NSString * parseId;
-//@property (nonatomic, retain) NSNumber * upVotes;
-//@property (nonatomic, retain) NSNumber * downVotes;
-//@property (nonatomic, retain) User *owner;
-//@property (nonatomic, retain) Quest *quest;
 
 /*
  * Add the submission to xcdata
