@@ -22,6 +22,26 @@ exports.getDailyQuest = function(request, response) {
 	});
 };
 
+exports.getStatsForQuest = function(request, response) {
+	var query = new Parse.Query("Quest");
+	var objectId = request.params.questId;
+
+	query.equalTo("objectId", objectId);
+	query.limit(1);
+
+	query.find({
+		success: function(results) {
+
+		},
+		error: function() {
+			response.error("Couldn't find any quests")
+		}
+	});
+
+	response.success(objectId);
+
+};
+
 /*
  * Replaces every (non-daily) quest in the table with information from the JSON file
  */ 

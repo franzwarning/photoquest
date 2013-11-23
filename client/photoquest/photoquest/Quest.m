@@ -2,7 +2,7 @@
 //  Quest.m
 //  photoquest
 //
-//  Created by Raymond kennedy on 11/20/13.
+//  Created by Raymond kennedy on 11/21/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
@@ -12,8 +12,6 @@
 
 @implementation Quest
 
-@dynamic hasCompleted;
-@dynamic inProgress;
 @dynamic parseId;
 @dynamic text;
 @dynamic xp;

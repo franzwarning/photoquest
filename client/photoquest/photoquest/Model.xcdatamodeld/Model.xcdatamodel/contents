@@ -2,8 +2,6 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Quest" representedClassName="Quest" syncable="YES">
         <attribute name="forDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="hasCompleted" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="inProgress" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="parseId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="xp" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
@@ -14,7 +12,9 @@
         <attribute name="downVotes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parseId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="success" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="upVotes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="votingClosed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="submissions" inverseEntity="User" syncable="YES"/>
         <relationship name="quest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Quest" inverseName="submissions" inverseEntity="Quest" syncable="YES"/>
     </entity>
@@ -25,8 +25,8 @@
         <relationship name="submissions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Submission" inverseName="owner" inverseEntity="Submission" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Submission" positionX="5139" positionY="5382" width="128" height="148"/>
-        <element name="Quest" positionX="5355" positionY="5472" width="126" height="148"/>
+        <element name="Submission" positionX="5139" positionY="5382" width="128" height="178"/>
+        <element name="Quest" positionX="5355" positionY="5472" width="126" height="118"/>
         <element name="User" positionX="5355" positionY="5310" width="128" height="103"/>
     </elements>
 </model>

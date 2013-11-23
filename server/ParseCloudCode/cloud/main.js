@@ -10,8 +10,8 @@ Parse.Cloud.define("uploadQuestJSON", function(request, response) {
   questUtils.uploadQuestJSON(request, response);
 });
 
-Parse.Cloud.define("getCurrentQuests", function(request, response) {
-  questUtils.getCurrentQuests(request, response);
+Parse.Cloud.define("getStatsForQuest", function(request, response) {
+  questUtils.getStatsForQuest(request, response);
 });
 
 // Photo Utils

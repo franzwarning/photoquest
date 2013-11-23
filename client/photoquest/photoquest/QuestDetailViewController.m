@@ -143,6 +143,8 @@
             [userPhoto setObject:[PFObject objectWithoutDataWithClassName:@"Quest" objectId:self.currentQuest.parseId] forKey:@"quest"];
             [userPhoto setObject:[NSNumber numberWithInt:0] forKey:@"upVotes"];
             [userPhoto setObject:[NSNumber numberWithInt:0] forKey:@"downVotes"];
+            [userPhoto setObject:[NSNumber numberWithBool:NO] forKey:@"success"];
+            [userPhoto setObject:[NSNumber numberWithBool:NO] forKey:@"votingClosed"];
 
             [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
@@ -181,6 +183,8 @@
     newSubmission.downVotes = [NSNumber numberWithInt:0];
     newSubmission.parseId = [parseObject objectId];
     newSubmission.creationDate = [parseObject createdAt];
+    newSubmission.votingClosed = [NSNumber numberWithBool:NO];
+    newSubmission.success = [NSNumber numberWithBool:NO];
     
     NSError *saveError = nil;
     if (![moc save:&saveError]) NSLog(@"Error saving managedobjectcontext: %@", saveError.localizedDescription);

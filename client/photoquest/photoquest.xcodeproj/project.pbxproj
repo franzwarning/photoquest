@@ -17,14 +17,14 @@
 		AF001F511793CCD9002757B0 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF001F501793CCD9002757B0 /* DataManager.m */; };
 		AF06A5FE182EF78A00220BA9 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF06A5FD182EF78A00220BA9 /* MainTabBarController.m */; };
 		AF32F05D1791F7A9009AA015 /* LeftPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF32F05C1791F7A9009AA015 /* LeftPanelViewController.m */; };
-		AF4F80F7183DEAB600916E7D /* Submission.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80F6183DEAB600916E7D /* Submission.m */; };
-		AF4F80FA183DEAB700916E7D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80F9183DEAB700916E7D /* User.m */; };
-		AF4F80FD183DEAB700916E7D /* Quest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F80FC183DEAB700916E7D /* Quest.m */; };
 		AF4F8100183EB5AC00916E7D /* ios7-camera-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F80FE183EB5AC00916E7D /* ios7-camera-outline.png */; };
 		AF4F8101183EB5AC00916E7D /* ios7-camera-outline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F80FF183EB5AC00916E7D /* ios7-camera-outline@2x.png */; };
 		AF4F8104183EB83400916E7D /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F8102183EB83400916E7D /* placeholder.png */; };
 		AF4F8105183EB83400916E7D /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF4F8103183EB83400916E7D /* placeholder@2x.png */; };
 		AF4F8108183ED3B300916E7D /* Quest+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F8107183ED3B300916E7D /* Quest+Utils.m */; };
+		AF4F810B183EF4B100916E7D /* Submission.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F810A183EF4B100916E7D /* Submission.m */; };
+		AF4F810E183EF4B100916E7D /* Quest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F810D183EF4B100916E7D /* Quest.m */; };
+		AF4F8111183EF4B100916E7D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4F8110183EF4B100916E7D /* User.m */; };
 		AF6D0CD017B0D45F008CD61E /* beginQuestButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCC17B0D45F008CD61E /* beginQuestButton.png */; };
 		AF6D0CD117B0D45F008CD61E /* beginQuestButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCD17B0D45F008CD61E /* beginQuestButton@2x.png */; };
 		AF6D0CD217B0D45F008CD61E /* beginQuestButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6D0CCE17B0D45F008CD61E /* beginQuestButtonPressed.png */; };
@@ -109,18 +109,18 @@
 		AF06A5FD182EF78A00220BA9 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		AF32F05B1791F7A9009AA015 /* LeftPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftPanelViewController.h; sourceTree = "<group>"; };
 		AF32F05C1791F7A9009AA015 /* LeftPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftPanelViewController.m; sourceTree = "<group>"; };
-		AF4F80F5183DEAB600916E7D /* Submission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submission.h; sourceTree = "<group>"; };
-		AF4F80F6183DEAB600916E7D /* Submission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submission.m; sourceTree = "<group>"; };
-		AF4F80F8183DEAB700916E7D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		AF4F80F9183DEAB700916E7D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		AF4F80FB183DEAB700916E7D /* Quest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quest.h; sourceTree = "<group>"; };
-		AF4F80FC183DEAB700916E7D /* Quest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quest.m; sourceTree = "<group>"; };
 		AF4F80FE183EB5AC00916E7D /* ios7-camera-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-camera-outline.png"; sourceTree = "<group>"; };
 		AF4F80FF183EB5AC00916E7D /* ios7-camera-outline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-camera-outline@2x.png"; sourceTree = "<group>"; };
 		AF4F8102183EB83400916E7D /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		AF4F8103183EB83400916E7D /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		AF4F8106183ED3B300916E7D /* Quest+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quest+Utils.h"; sourceTree = "<group>"; };
 		AF4F8107183ED3B300916E7D /* Quest+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quest+Utils.m"; sourceTree = "<group>"; };
+		AF4F8109183EF4B100916E7D /* Submission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submission.h; sourceTree = "<group>"; };
+		AF4F810A183EF4B100916E7D /* Submission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submission.m; sourceTree = "<group>"; };
+		AF4F810C183EF4B100916E7D /* Quest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quest.h; sourceTree = "<group>"; };
+		AF4F810D183EF4B100916E7D /* Quest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quest.m; sourceTree = "<group>"; };
+		AF4F810F183EF4B100916E7D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		AF4F8110183EF4B100916E7D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AF6D0CCC17B0D45F008CD61E /* beginQuestButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beginQuestButton.png; sourceTree = "<group>"; };
 		AF6D0CCD17B0D45F008CD61E /* beginQuestButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beginQuestButton@2x.png"; sourceTree = "<group>"; };
 		AF6D0CCE17B0D45F008CD61E /* beginQuestButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beginQuestButtonPressed.png; sourceTree = "<group>"; };
@@ -346,12 +346,12 @@
 		AFE2738E17931E1A004A31A5 /* NSManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				AF4F80FB183DEAB700916E7D /* Quest.h */,
-				AF4F80FC183DEAB700916E7D /* Quest.m */,
-				AF4F80F8183DEAB700916E7D /* User.h */,
-				AF4F80F9183DEAB700916E7D /* User.m */,
-				AF4F80F5183DEAB600916E7D /* Submission.h */,
-				AF4F80F6183DEAB600916E7D /* Submission.m */,
+				AF4F810F183EF4B100916E7D /* User.h */,
+				AF4F8110183EF4B100916E7D /* User.m */,
+				AF4F810C183EF4B100916E7D /* Quest.h */,
+				AF4F810D183EF4B100916E7D /* Quest.m */,
+				AF4F8109183EF4B100916E7D /* Submission.h */,
+				AF4F810A183EF4B100916E7D /* Submission.m */,
 			);
 			name = NSManagedObjects;
 			sourceTree = "<group>";
@@ -591,18 +591,17 @@
 				AF4F8108183ED3B300916E7D /* Quest+Utils.m in Sources */,
 				AF06A5FE182EF78A00220BA9 /* MainTabBarController.m in Sources */,
 				30FC9E531787AFB7005DA0E5 /* ProfileViewController.m in Sources */,
-				AF4F80FD183DEAB700916E7D /* Quest.m in Sources */,
-				AF4F80F7183DEAB600916E7D /* Submission.m in Sources */,
 				30FC9E561787AFF9005DA0E5 /* FriendsViewController.m in Sources */,
 				30FC9E591787B011005DA0E5 /* AchievementsViewController.m in Sources */,
-				AF4F80FA183DEAB700916E7D /* User.m in Sources */,
 				30FC9E5C1787B028005DA0E5 /* FriendsNavigationController.m in Sources */,
 				30FC9E5F1787B035005DA0E5 /* AchievementsNavigationController.m in Sources */,
 				AFAC11871791F02600B57F1B /* ProfileNavigationController.m in Sources */,
 				AF32F05D1791F7A9009AA015 /* LeftPanelViewController.m in Sources */,
+				AF4F8111183EF4B100916E7D /* User.m in Sources */,
 				AFED3677179246820090FFA4 /* QuestsNavigationController.m in Sources */,
 				AFE7EAAE1832EFFF0025A5E0 /* UIColor+ColorWithHex.m in Sources */,
 				AFED368617927A260090FFA4 /* BebasLabel.m in Sources */,
+				AF4F810E183EF4B100916E7D /* Quest.m in Sources */,
 				AFE2738D17931B99004A31A5 /* Model.xcdatamodeld in Sources */,
 				AFE273AE179322F2004A31A5 /* QuestManager.m in Sources */,
 				AFA0E52D1831AA280081D5D2 /* QuestsViewController.m in Sources */,
@@ -612,6 +611,7 @@
 				AFD377F317ADB73100326A3D /* NSDate+Utils.m in Sources */,
 				AFA0E5301831AB2A0081D5D2 /* QuestDetailViewController.m in Sources */,
 				AFF760CE17AE165B0049FD07 /* XPBarView.m in Sources */,
+				AF4F810B183EF4B100916E7D /* Submission.m in Sources */,
 				AF79B8D917AEF47600D7B264 /* XPManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

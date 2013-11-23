@@ -55,12 +55,15 @@
 {
     [super viewWillAppear:animated];
     
+    self.questButton.enabled = NO;
+    
     // Get the current quests the user is working on
     [[QuestManager sharedManager] setDelegate:self];
     [[QuestManager sharedManager] getDailyQuest];
     
     if (!self.dailyQuest) {
         [self changeQuestText:@"Loading..."];
+        [self.xpLabel setText:@"Loading..."];
     }
     
     // Unhide the tab bar
@@ -110,7 +113,59 @@
     self.dailyQuest = dailyQuest;
     [self changeQuestText:self.dailyQuest.text];
     
+    [self checkForQuestButton];
+    [self updateStats];
+    
     NSLog(@"Daily Quest: %@", dailyQuest.text);
+}
+
+/*
+ * Updates the quest button to the appropriate shit
+ */
+- (void)checkForQuestButton
+{
+    // Get the quest and see if it has a submission from user
+    NSManagedObjectContext *moc = [[DataManager sharedInstance] managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"quest == %@ && owner == %@", self.dailyQuest, [User getCurrentUser]];
+    [request setFetchLimit:1];
+    [request setPredicate:predicate];
+    [request setEntity:[NSEntityDescription entityForName:@"Submission" inManagedObjectContext:moc]];
+    
+    NSError *error = nil;
+    NSArray *results = [moc executeFetchRequest:request error:&error];
+    
+    if (![results count] || !results) {
+        
+        // User hasn't submitted yet
+        NSLog(@"User hasn't submitted for quest yet...");
+        [self.questButton setEnabled:YES];
+        [self.questButton setTitle:@"Begin Quest" forState:UIControlStateNormal];
+        [self.questButton setTitleColor:[UIColor colorWithRed:0.18f green:0.80f blue:0.44f alpha:1.00f] forState:UIControlStateNormal];
+        
+    } else if ([results count] == 1) {
+        
+        // User has already submitted
+        NSLog(@"User already submitted for quest...");
+        [self.questButton setEnabled:NO];
+        [self.questButton setTitle:@"In Progress..." forState:UIControlStateNormal];
+        [self.questButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        
+    } else {
+        // We encountered a fatal error
+        NSLog(@"[FATAL] -- found more than one daily quest for date: %@", [[NSDate date] strippedDate]);
+
+    }
+}
+
+/*
+ * Update all the stats elements
+ */
+- (void)updateStats
+{
+    // First set the xp to the appropriate amount...
+    self.xpLabel.text = [NSString stringWithFormat:@"%d XP", [self.dailyQuest.xp intValue]];
 }
 
 /*

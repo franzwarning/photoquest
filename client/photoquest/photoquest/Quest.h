@@ -2,7 +2,7 @@
 //  Quest.h
 //  photoquest
 //
-//  Created by Raymond kennedy on 11/20/13.
+//  Created by Raymond kennedy on 11/21/13.
 //  Copyright (c) 2013 Randomay Designs. All rights reserved.
 //
 
@@ -13,8 +13,6 @@
 
 @interface Quest : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * hasCompleted;
-@property (nonatomic, retain) NSNumber * inProgress;
 @property (nonatomic, retain) NSString * parseId;
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) NSNumber * xp;

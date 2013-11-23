@@ -121,7 +121,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="Begin Quest">
                                             <color key="titleColor" red="0.180392161" green="0.80000007149999997" blue="0.43921571970000001" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="questButtonHit:" destination="2" eventType="touchUpInside" id="NsM-P2-NXp"/>
@@ -301,7 +301,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="Take Photo">
                                             <color key="titleColor" red="0.18039216101169586" green="0.80000007152557373" blue="0.43921571969985962" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="takePhotoButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="z98-Bh-fEO"/>
@@ -313,7 +313,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="Choose Photo">
                                             <color key="titleColor" red="0.180392161" green="0.80000007149999997" blue="0.43921571970000001" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="choosePhotoButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="kHk-ez-43m"/>
@@ -325,7 +325,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" red="0.69821588550000002" green="0.32467131430000001" blue="0.84885204079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="submitButtonHit:" destination="Hec-5d-lw6" eventType="touchUpInside" id="Ols-oD-hED"/>
