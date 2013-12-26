@@ -512,11 +512,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Randomay Designs";
-				TargetAttributes = {
-					DA6ACEE617801470009C06C5 = {
-						DevelopmentTeam = Y6FLUCNFEW;
-					};
-				};
 			};
 			buildConfigurationList = DA6ACEE217801470009C06C5 /* Build configuration list for PBXProject "photoquest" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -697,7 +692,8 @@
 		DA6ACF0B17801470009C06C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -711,6 +707,7 @@
 				);
 				INFOPLIST_FILE = "photoquest/photoquest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8CB85A97-BB63-4AC3-B9C5-375ACFAB45D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -718,7 +715,8 @@
 		DA6ACF0C17801470009C06C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -732,6 +730,7 @@
 				);
 				INFOPLIST_FILE = "photoquest/photoquest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8CB85A97-BB63-4AC3-B9C5-375ACFAB45D5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

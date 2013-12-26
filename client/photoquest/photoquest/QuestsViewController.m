@@ -91,6 +91,8 @@
     
     [self.questLabel setFrame:CGRectMake(QUEST_LABEL_X_SPACING, QUEST_LABEL_Y_SPACING, QUEST_LABEL_WIDTH, expectedLabelSize.height)];
     
+    NSLog(@"Frame: %@", NSStringFromCGRect(self.questLabel.frame));
+    
     // Make sure the stat height is the right place
     [self updateStatViewHeight];
 }
